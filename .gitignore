@@ -1,0 +1,15 @@
+# Salesforce CLI local state: target-org alias, source tracking, org id.
+.sf/
+.sfdx/
+.localdevserver/
+deploy-options.json
+
+# Tooling
+node_modules/
+coverage/
+*.log
+
+# Editor and OS
+.DS_Store
+.idea/
+.vscode/

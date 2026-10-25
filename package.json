@@ -1,0 +1,19 @@
+{
+  "name": "salesforce-agent-optimizer-test",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A before-and-after test of Salesforce Agent Optimizer: one service agent, 30 locked questions, three runs per version. Companion repo for the article.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "node scripts/check-consistency.mjs",
+    "build:knowledge": "node scripts/build-knowledge-apex.mjs",
+    "deploy": "sf project deploy start --source-dir force-app",
+    "test:apex": "sf apex run test --class-names StoreOrderFlowsTest --result-format human --wait 10",
+    "load:orders": "sf apex run --file scripts/apex/load-sample-orders.apex",
+    "load:knowledge": "sf apex run --file scripts/apex/load-knowledge-articles.apex"
+  },
+  "license": "MIT",
+  "author": "Himanshu Palerwal"
+}

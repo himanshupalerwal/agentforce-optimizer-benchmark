@@ -1,0 +1,6 @@
+# Only force-app/ is deployed. Keep build and OS noise out of it.
+package.xml
+**/.DS_Store
+**/jsconfig.json
+**/.eslintrc.json
+**/__tests__/**

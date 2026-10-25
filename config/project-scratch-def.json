@@ -1,0 +1,22 @@
+{
+  "orgName": "Agent Optimizer Test",
+  "edition": "Developer",
+  "language": "en_US",
+  "hasSampleData": false,
+  "features": ["Einstein1AIPlatform", "ServiceCloud"],
+  "settings": {
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
+    },
+    "EinsteinGptSettings": {
+      "enableEinsteinGptPlatform": true
+    },
+    "agentPlatformSettings": {
+      "enableAgentPlatform": true
+    },
+    "knowledgeSettings": {
+      "enableKnowledge": true,
+      "enableLightningKnowledge": true
+    }
+  }
+}
