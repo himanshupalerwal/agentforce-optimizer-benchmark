@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delivered_Date__c</fullName>
+    <description>The day the carrier delivered the order. Blank until it is delivered. The 30-day return window starts here.</description>
+    <externalId>false</externalId>
+    <label>Delivered Date</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>
