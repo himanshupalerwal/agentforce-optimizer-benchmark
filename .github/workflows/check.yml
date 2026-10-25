@@ -1,0 +1,29 @@
+# Runs the offline consistency check on every push and pull request.
+#
+# It needs no org and no credentials, so forks are covered too. It checks
+# that the test set, practice conversations, sample data, flows, knowledge
+# articles, scoring sheet, and agent instructions all agree with each other.
+#
+# Not covered here: anything that needs an org. Deploy, run the Apex tests,
+# and run Testing Center against your own sandbox or Developer Edition org.
+name: Consistency check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Test set, data and docs agree
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/check-consistency.mjs
