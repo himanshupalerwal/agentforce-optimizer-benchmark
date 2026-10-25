@@ -15,7 +15,7 @@ works only from the 60 conversations in [`../practice/`](../practice/).
 | `id` | `OS`, `RT`, `PQ`, `VM`, `OT` or `ES`, then a number |
 | `category` | Order status 6, Returns 6, Product questions 6, Vague or multi-part 4, Off-topic 4, Escalation 4 |
 | `customer_says` | The customer's message, exactly as it is sent |
-| `expected_subagent` | Order Status, Returns, Product Help, or the template's Escalation or Off Topic |
+| `expected_subagent` | Order Status, Returns, Product Help, or the template's Escalation, Off Topic or Ambiguous Question |
 | `expected_action` | Get Order Status, Create Return Case, Answer Questions with Knowledge, Escalate, or None. A `+` joins two actions. |
 | `expected_answer` | What a passing answer does |
 | `lookup_result` | What Get Order Status returns for each order mentioned: `verified` or `not_verified`. `n/a` when no lookup is expected. |
@@ -61,10 +61,10 @@ see a result.
   is that it refuses and runs no lookup.
 - **Escalation.** Use the action name your template's escalation shows, and
   note whether the org has a live person to hand off to.
-- **The template's other subagents.** If the template brings a general FAQ or
-  ambiguous-question subagent and you keep it, product, policy and vague
-  questions may route there. Either remove it as a documented day-one step, or
-  name it as the expected subagent. Do not decide after seeing a result.
+- **The template's Ambiguous Question subagent.** The service agent template
+  ships Escalation, Off Topic and Ambiguous Question, and all three stay as
+  they are. VM-02 ("They don't fit.") expects Ambiguous Question. VM-01 ("I
+  need help with an order.") names an order, so it expects Order Status.
 - **VM-03 needs two skills.** It asks for an order status and a shipping
   price. The day-one Order Status subagent has no knowledge action, so the
   baseline is expected to miss half of it. That is a real gap for Optimizer to
