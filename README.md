@@ -26,7 +26,8 @@ changes. This repo holds everything you need to rerun that test in your own org.
 | Actions | [`flows/`](force-app/main/default/flows) | Get Order Status and Create Return Case, two autolaunched flows the agent calls |
 | Flow tests | [`StoreOrderFlowsTest`](force-app/main/default/classes/StoreOrderFlowsTest.cls) | Match, wrong email, missing order and blank input for both flows |
 | Access | [`permissionsets/`](force-app/main/default/permissionsets) | `Store_Orders_Admin` for you, `Store_Orders_Agent` for the agent's user |
-| The agent | [`docs/agent-setup.md`](docs/agent-setup.md) | The template, the three subagents, and their exact day-one instructions |
+| The agent | [`aiAuthoringBundles/Gear_Store_Service_Agent`](force-app/main/default/aiAuthoringBundles/Gear_Store_Service_Agent) | The day-one agent as one Agent Script file: the service agent template plus three subagents |
+| Agent setup | [`docs/agent-setup.md`](docs/agent-setup.md) | How to build or publish that agent, and its exact day-one instructions |
 | Test set | [`test-set/test-set.csv`](test-set/test-set.csv) | 30 questions, each with an expected subagent, action and answer |
 | Practice | [`practice/practice-conversations.csv`](practice/practice-conversations.csv) | 60 conversations for Optimizer to learn from. No shared wording or order numbers with the test set. |
 | Scoring | [`test-set/scoring-sheet.csv`](test-set/scoring-sheet.csv) | Run 1 to Run 3 in columns C to E, and the two-of-three result |
@@ -70,9 +71,10 @@ The 30-day return window lands the same way every time.
 ## Quick start
 
 **Requirements:** Salesforce CLI 2.150+, Node 22+, and an org with Agentforce,
-Testing Center, and Lightning Knowledge. To run the "after" half you also need
-Agent Optimizer, which Salesforce offers in beta through your account
-executive.
+Testing Center, Lightning Knowledge, and Data Cloud. Knowledge answers go
+through an Agentforce Data Library, and a Data Library needs Data Cloud. To
+run the "after" half you also need Agent Optimizer, which Salesforce offers in
+beta through your account executive.
 
 > **Never use a production org.** Testing Center runs your actions for real, so
 > Create Return Case opens real Cases, and test runs use credits. Use a sandbox,
@@ -98,11 +100,13 @@ npm run load:knowledge                 # the 8 articles, created and published
 checkbox on your user. Turning on Lightning Knowledge cannot be undone, which
 is one more reason to use a disposable org.
 
-Then build the agent by following [docs/agent-setup.md](docs/agent-setup.md).
+Then create the agent's user, connect the knowledge, and publish the agent by
+following [docs/agent-setup.md](docs/agent-setup.md).
 
-A scratch org definition is in [`config/project-scratch-def.json`](config/project-scratch-def.json)
-for building and testing the flows. Agent Optimizer is a beta you request, so
-check that your org has it before you plan the after runs.
+A scratch org definition is in [`config/project-scratch-def.json`](config/project-scratch-def.json).
+A standard scratch org runs the flows, the Apex tests and the agent's order
+and return questions. It has no Data Cloud, so its knowledge questions fail,
+and no Agent Optimizer. Run the real test in an org that has both.
 
 ---
 
@@ -152,6 +156,7 @@ force-app/main/default/
   flows/Create_Return_Case         order number + email + reason in; case number out
   classes/StoreOrderFlowsTest      Apex tests for both flows
   permissionsets/                  Store_Orders_Admin · Store_Orders_Agent
+  aiAuthoringBundles/              the day-one agent, as Agent Script
 knowledge/                         the 8 articles, as Markdown (source of truth)
 scripts/
   apex/load-sample-orders.apex     12 orders, dates relative to today
@@ -195,7 +200,9 @@ field's 1,000-character limit, which `npm run check` enforces.
 Deployed and tested on a Developer Edition scratch org (API 68.0, source at
 67.0) with Salesforce CLI 2.150.6 and Node 22.14, on 24 October 2026: the
 deploy, all Apex tests, and both loaders run twice to prove they are safe to
-re-run. Agentforce moves quickly; if something here has drifted, trust the org
+re-run. The agent was published and activated there, and its order and return
+actions ran as the agent's user. Its knowledge action was not verified,
+because that org has no Data Cloud. Agentforce moves quickly; if something here has drifted, trust the org
 over this README.
 
 ## License

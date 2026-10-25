@@ -44,7 +44,7 @@ const CATEGORIES = {
   'Off-topic': { prefix: 'OT', test: 4 },
   Escalation: { prefix: 'ES', test: 4 },
 };
-const SUBAGENTS = ['Order Status', 'Returns', 'Product Help', 'Escalation', 'Off Topic'];
+const SUBAGENTS = ['Order Status', 'Returns', 'Product Help', 'Escalation', 'Off Topic', 'Ambiguous Question'];
 const ACTIONS = ['Get Order Status', 'Create Return Case', 'Answer Questions with Knowledge', 'Escalate', 'None'];
 const LOOKUPS = ['verified', 'not_verified'];
 const DECISIONS = ['case', 'no_case_window', 'no_case_final_sale', 'no_case_not_delivered', 'no_case_not_verified'];
@@ -327,6 +327,20 @@ for (const [name, text] of Object.entries(DAY_ONE_INSTRUCTIONS)) {
 check(/Agentforce Service Agent/.test(setup), 'agent-setup.md must name the Agentforce Service Agent template');
 check(/escalation and off-topic handling as they are/i.test(setup), 'agent-setup.md must say the template escalation and off-topic handling stay as they are');
 check(existsSync(join(ROOT, 'results/README.md')), 'results/README.md is missing');
+// The Agent Script file must carry the same day-one instructions, and keep the
+// template's three standard subagents untouched in the router.
+const agentFile = 'force-app/main/default/aiAuthoringBundles/Gear_Store_Service_Agent/Gear_Store_Service_Agent.agent';
+if (check(existsSync(join(ROOT, agentFile)), `${agentFile} is missing`)) {
+  const agent = read(agentFile);
+  for (const [name, text] of Object.entries(DAY_ONE_INSTRUCTIONS)) {
+    check(agent.includes(`label: "${name}"`) && agent.includes(`| ${text}\n`), `the agent file must carry the ${name} instructions word for word`);
+  }
+  for (const sub of ['order_status', 'returns', 'product_help', 'escalation', 'off_topic', 'ambiguous_question']) {
+    check(agent.includes(`@utils.transition to @subagent.${sub}`) && agent.includes(`subagent ${sub}:`), `the agent file must define and route to subagent ${sub}`);
+  }
+  check(agent.includes('target: "flow://Get_Order_Status"') && agent.includes('target: "flow://Create_Return_Case"'), 'the agent file must call both flows');
+  check(!/subagent order_status:[\s\S]*?(create_return_case|AnswerQuestionsWithKnowledge)[\s\S]*?\nsubagent returns:/.test(agent), 'day one: Order Status has only Get Order Status');
+}
 done();
 
 console.log(`\n${passed} checks passed, ${failures.length} failed.`);
