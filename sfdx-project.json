@@ -3,6 +3,10 @@
     {
       "path": "force-app",
       "default": true
+    },
+    {
+      "path": "data-cloud",
+      "default": false
     }
   ],
   "name": "salesforce-agent-optimizer-test",

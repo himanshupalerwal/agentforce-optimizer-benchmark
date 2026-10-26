@@ -26,6 +26,7 @@ changes. This repo holds everything you need to rerun that test in your own org.
 | Actions | [`flows/`](force-app/main/default/flows) | Get Order Status and Create Return Case, two autolaunched flows the agent calls |
 | Flow tests | [`StoreOrderFlowsTest`](force-app/main/default/classes/StoreOrderFlowsTest.cls) | Match, wrong email, missing order and blank input for both flows |
 | Access | [`permissionsets/`](force-app/main/default/permissionsets) | `Store_Orders_Admin` for you, `Store_Orders_Agent` for the agent's user |
+| Knowledge access | [`data-cloud/`](data-cloud/main/default/permissionsets) | `Store_Knowledge_Agent`: the agent's user can read the knowledge library. Data Cloud orgs only. |
 | The agent | [`aiAuthoringBundles/Gear_Store_Service_Agent`](force-app/main/default/aiAuthoringBundles/Gear_Store_Service_Agent) | The day-one agent as one Agent Script file: the service agent template plus three subagents |
 | Agent setup | [`docs/agent-setup.md`](docs/agent-setup.md) | How to build or publish that agent, and its exact day-one instructions |
 | Test set | [`test-set/test-set.csv`](test-set/test-set.csv) | 30 questions, each with an expected subagent, action and answer |
@@ -96,9 +97,10 @@ npm run load:orders                    # the 12 sample orders, dated from today
 npm run load:knowledge                 # the 8 articles, created and published
 ```
 
-`load:knowledge` needs Lightning Knowledge turned on and the **Knowledge User**
-checkbox on your user. Turning on Lightning Knowledge cannot be undone, which
-is one more reason to use a disposable org.
+`load:knowledge` needs Lightning Knowledge turned on (Setup, Knowledge
+Settings) and the **Knowledge User** checkbox on your user. Turning on
+Lightning Knowledge cannot be undone, which is one more reason to use an org
+kept for this test.
 
 Then create the agent's user, connect the knowledge, and publish the agent by
 following [docs/agent-setup.md](docs/agent-setup.md).
@@ -157,6 +159,7 @@ force-app/main/default/
   classes/StoreOrderFlowsTest      Apex tests for both flows
   permissionsets/                  Store_Orders_Admin · Store_Orders_Agent
   aiAuthoringBundles/              the day-one agent, as Agent Script
+data-cloud/                        Store_Knowledge_Agent permission set (Data Cloud orgs only)
 knowledge/                         the 8 articles, as Markdown (source of truth)
 scripts/
   apex/load-sample-orders.apex     12 orders, dates relative to today
@@ -200,9 +203,10 @@ field's 1,000-character limit, which `npm run check` enforces.
 Deployed and tested on a Developer Edition scratch org (API 68.0, source at
 67.0) with Salesforce CLI 2.150.6 and Node 22.14, on 24 October 2026: the
 deploy, all Apex tests, and both loaders run twice to prove they are safe to
-re-run. The agent was published and activated there, and its order and return
-actions ran as the agent's user. Its knowledge action was not verified,
-because that org has no Data Cloud. Agentforce moves quickly; if something here has drifted, trust the org
+re-run. The same setup was then repeated in a Developer Edition org with Data
+Cloud on 25 October 2026. There the agent was published and activated, its
+order action ran as the agent's user, and its knowledge action answered from
+the store's articles through the Data Library. Agentforce moves quickly; if something here has drifted, trust the org
 over this README.
 
 ## License

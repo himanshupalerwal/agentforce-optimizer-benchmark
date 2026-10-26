@@ -27,7 +27,7 @@ variables:
           description: "This variable may also be referred to as VerifiedCustomerId"
 
 knowledge:
-    rag_feature_config_id: ""
+    rag_feature_config_id: "ARFPC_1JDg7000005hVYjGAM"
     citations_enabled: False
     citations_url: ""
 

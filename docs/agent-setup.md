@@ -63,22 +63,46 @@ reasoning.
 
 ## 3. Connect the knowledge articles
 
-Create a Data Library from the published articles, indexed on Title and
-Summary. Each article's text is in the standard Summary field.
+These steps need Data Cloud turned on (Setup, Data Cloud Setup, Get Started).
+
+**Create a Data Library** from the published articles, indexed on Title and
+Summary. Each article's text is in the standard Summary field. Do not also
+pass Summary as a content field: a field cannot be both.
 
 ```bash
 sf agent adl create --name "Store Knowledge" --developer-name Store_Knowledge \
-  --source-type knowledge --primary-index-field1 Title --primary-index-field2 Summary \
-  --content-fields Summary --wait 15
+  --source-type knowledge --primary-index-field1 Title --primary-index-field2 Summary --wait 30
+sf agent adl list        # wait until Store Knowledge shows READY
 ```
 
-Then assign the library to the agent. In Agentforce Builder, add it as the
-agent's data library. In the agent file, its knowledge configuration ID goes
-in `rag_feature_config_id` in the `knowledge:` block.
+Indexing runs five stages and can take 20 to 40 minutes. If you create the
+library within minutes of turning Data Cloud on, the first stage can fail with
+`ADL_DC_ASSET_FAILED`. Wait ten minutes, delete the library with
+`sf agent adl delete`, and create it again.
 
-If knowledge questions still come back empty in the preview while order
-questions work, give the agent's user Knowledge read access (the Allow View
-Knowledge permission) and preview again.
+**Point the agent at it.** Put `ARFPC_` followed by the library ID in the
+agent file's `knowledge:` block:
+
+```
+knowledge:
+    rag_feature_config_id: "ARFPC_<library id>"
+```
+
+**Give the agent's user access to it.** The library lives in Data Cloud's
+default data space, and the agent's user needs that data space plus read
+access to the Knowledge fields the library indexes. Without them, the
+knowledge action fails with "you don't have access to the data space used by
+the assigned data library", and then "to one or more fields used by the
+assigned data library". The `data-cloud/` folder holds a permission set for
+exactly that:
+
+```bash
+npm run deploy:data-cloud
+sf org assign permset --name Store_Knowledge_Agent --on-behalf-of <agent user's username>
+```
+
+It is kept out of `force-app/` because it only deploys to an org that has
+Data Cloud and Lightning Knowledge.
 
 Two topics are left out on purpose: kayaks and warranties. Questions PQ-05
 and PQ-06 check that the agent says it does not know instead of inventing an
@@ -152,15 +176,22 @@ back to it at any time. Publishing alone does not activate the agent.
 
 ## 7. Check it before Run 1
 
-Preview one order question and one product question:
+Check the setup with questions that are **not** in the test set. Preview
+sessions can be logged in the org, and anything logged is something Agent
+Optimizer could read. The test questions must never reach it.
 
 ```bash
 sf agent preview start --api-name Gear_Store_Service_Agent
 sf agent preview send --api-name Gear_Store_Service_Agent --session-id <id> \
-  --utterance "Where is my order RO-1003? My email is taylor@example.com."
+  --utterance "Is there a fee for your faster shipping option, and how fast is it?"
 ```
 
-The order question should call Get Order Status and return `verified` true.
-The product question should call Answer Questions with Knowledge without an
-error. If either fails, fix the setup before Run 1. A setup failure is not a
-result.
+A working setup routes that to Product Help, calls Answer Questions with
+Knowledge without an error, and answers $14.95 and 2 to 3 business days. For
+the order flow, ask about a practice order, such as RO-1011 with
+avery@example.com: Get Order Status should return `verified` true.
+
+Read the trace with `sf agent trace list` and `sf agent trace read`. A correct
+answer is not enough. The router can answer a question itself, without the
+knowledge action, and still sound right. If either check fails, fix the setup
+before Run 1. A setup failure is not a result.

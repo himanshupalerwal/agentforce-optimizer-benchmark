@@ -289,6 +289,11 @@ for (const flowName of ['Get_Order_Status', 'Create_Return_Case']) {
   check(agentXml.includes(`<flow>${flowName}</flow>`), `Store_Orders_Agent must grant access to ${flowName}`);
 }
 check(/<allowEdit>false<\/allowEdit>[\s\S]*?<object>Store_Order__c<\/object>/.test(agentXml.slice(agentXml.lastIndexOf('<objectPermissions>'))), 'Store_Orders_Agent must not edit Store Orders');
+const kb = read('data-cloud/main/default/permissionsets/Store_Knowledge_Agent.permissionset-meta.xml');
+check(/<dataspaceScope>default<\/dataspaceScope>/.test(kb), 'Store_Knowledge_Agent must grant the default data space');
+check(fieldPerms(kb)['Knowledge__kav.Summary']?.readable === true, 'Store_Knowledge_Agent must grant read on Knowledge__kav.Summary');
+check(/<allowRead>true<\/allowRead>[\s\S]*?<object>Knowledge__kav<\/object>/.test(kb), 'Store_Knowledge_Agent must grant read on Knowledge');
+check(!/<allow(Create|Edit|Delete)>true/.test(kb), 'Store_Knowledge_Agent must be read-only');
 done();
 
 // ── 6. Knowledge ───────────────────────────────────────────────────────────

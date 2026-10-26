@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <dataspaceScopes>
+        <customizeDataApplicationDefinitions>false</customizeDataApplicationDefinitions>
+        <customizeDataObjSecondaryIndexDefinitions>false</customizeDataObjSecondaryIndexDefinitions>
+        <customizeDataShareDefinitions>false</customizeDataShareDefinitions>
+        <customizeFTestDataspaceScopedDefinition>false</customizeFTestDataspaceScopedDefinition>
+        <customizeMLPredictionDefinitions>false</customizeMLPredictionDefinitions>
+        <customizeSemanticSearchDefinitions>false</customizeSemanticSearchDefinitions>
+        <dataspaceScope>default</dataspaceScope>
+        <viewDataApplicationDefinitions>false</viewDataApplicationDefinitions>
+        <viewDataObjSecondaryIndexDefinitions>false</viewDataObjSecondaryIndexDefinitions>
+        <viewDataShareDefinitions>false</viewDataShareDefinitions>
+        <viewFTestDataspaceScopedDefinition>false</viewFTestDataspaceScopedDefinition>
+        <viewMLPredictionDefinitions>false</viewMLPredictionDefinitions>
+        <viewSemanticSearchDefinitions>false</viewSemanticSearchDefinitions>
+    </dataspaceScopes>
+    <description>For the agent's user in a Data Cloud org: the default data space, where the knowledge library lives, and read access to the Knowledge fields it indexes.</description>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Knowledge__kav.Summary</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Store Knowledge Agent</label>
+    <objectPermissions>
+        <allowCreate>false</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>false</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Knowledge__kav</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+</PermissionSet>
