@@ -6,7 +6,7 @@ system:
 
 config:
     developer_name: "Gear_Store_Service_Agent"
-    default_agent_user: "agent.user.9737d5f4b8dd@example.com"
+    default_agent_user: "agent.user.dca0cc688af6@agentforce.com"
     agent_label: "Gear Store Service Agent"
     description: "Customer service agent for a made-up outdoor gear store: order status, returns, and product questions."
 
