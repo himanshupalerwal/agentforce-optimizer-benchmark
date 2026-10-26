@@ -8,18 +8,26 @@ When the runs are done, it holds:
 
 ```
 results/
-  baseline/              the day-one agent, version 1
-    run-1.csv            raw Testing Center export, unedited
-    run-2.csv
-    run-3.csv
-    scoring-sheet.csv    a filled-in copy of test-set/scoring-sheet.csv
-  after/                 the agent after applying Optimizer's recommendations
-    run-1.csv
-    run-2.csv
-    run-3.csv
+  baseline/                      the day-one agent, version 1
+    run-1/test-result-<id>.json  raw Testing Center result, unedited
+    run-2/test-result-<id>.json
+    run-3/test-result-<id>.json
+    scoring-sheet.csv            filled in by npm run score -- baseline
+    scores.md                    per-category table and every failed check
+  after/                         the agent after applying Optimizer's recommendations
+    run-1/ run-2/ run-3/         the same layout
     scoring-sheet.csv
-  overrides.md           every AI-judged answer that was overruled by hand, and why
-  recommendations.md     each Optimizer recommendation, whether it was applied, and why
+    scores.md
+  overrides.md                   every AI-judged answer overruled by hand, and why
+  recommendations.md             each Optimizer recommendation, applied or not, and why
+```
+
+Run a phase with the Salesforce CLI, three times:
+
+```bash
+sf agent test run --api-name Store_Agent_30_Questions --wait 90 \
+  --result-format json --output-dir results/baseline/run-1
+npm run score -- baseline
 ```
 
 Rules for this folder:

@@ -134,8 +134,12 @@ and no Agent Optimizer. Run the real test in an org that has both.
 
 ## Results
 
-**Not run yet.** The `results/` folder stays empty until the baseline and after
-runs are done. Nothing in this repo is estimated.
+**Baseline: run. After: not run yet.** The three baseline runs of version 1
+are in [`results/baseline/`](results/baseline): the raw Testing Center files,
+unedited, and the automated scores in
+[`scores.md`](results/baseline/scores.md). Those scores come before the human
+review of the AI-judged answers, so the table below stays empty until that
+review is done. Nothing in this repo is estimated.
 
 | Category | Questions | Before (passed, 2 of 3 runs) | After (passed, 2 of 3 runs) |
 | --- | --- | --- | --- |
