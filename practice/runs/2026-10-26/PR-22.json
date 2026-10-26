@@ -1,0 +1,12 @@
+{
+  "id": "PR-22",
+  "category": "Returns",
+  "sessionId": "01a179ca-fd14-7db3-862e-66ae39d1e641",
+  "at": "2026-10-26T19:58:38.302Z",
+  "transcript": [
+    {
+      "customer": "Send back RO-1007 please, using quinn@example.com",
+      "agent": "I could not verify your order using the order number RO-1007 and the email quinn@example.com. Please double-check that both the order number and email address match exactly what was used when the order was placed.\n\nIf you need help or want to talk to our customer care team, let me know and I can connect you. Would you like to try again with different details or speak to a person?"
+    }
+  ]
+}

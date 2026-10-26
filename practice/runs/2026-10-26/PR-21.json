@@ -1,0 +1,12 @@
+{
+  "id": "PR-21",
+  "category": "Returns",
+  "sessionId": "01a179ca-c2d3-7056-a022-091164015c61",
+  "at": "2026-10-26T19:58:27.477Z",
+  "transcript": [
+    {
+      "customer": "Return RO-1011 for me. avery@example.com",
+      "agent": "Your return case for order RO-1011 has been opened. The case number is 00001031. You will receive a prepaid return label by email within one business day.\n\nMost items can be returned within 30 days of delivery, as long as they are unused and in their original packaging with tags. Return shipping is free if the item was damaged or incorrect; otherwise, a $6.95 label fee will be deducted from your refund. Once your return reaches our warehouse, your original payment will be refunded within 5 to 7 business days.\n\nDo you need help with anything else related to your return?"
+    }
+  ]
+}

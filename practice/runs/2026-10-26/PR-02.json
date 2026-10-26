@@ -1,0 +1,12 @@
+{
+  "id": "PR-02",
+  "category": "Order status",
+  "sessionId": "01a179c5-0f20-7b89-9465-a66ad6adc891",
+  "at": "2026-10-26T19:52:13.547Z",
+  "transcript": [
+    {
+      "customer": "When will order RO-1011 arrive? The email I used is avery@example.com",
+      "agent": "Your order RO-1011 for the Summit Headlamp is currently processing. The expected delivery date is November 2, 2026.\n\nIs there anything else you would like to know about your order, or do you need help with returns or speaking to customer care?"
+    }
+  ]
+}

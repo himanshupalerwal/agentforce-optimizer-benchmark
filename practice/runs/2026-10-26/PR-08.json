@@ -1,0 +1,16 @@
+{
+  "id": "PR-08",
+  "category": "Order status",
+  "sessionId": "01a179c8-886b-7dbc-b7fb-3af2b4c63555",
+  "at": "2026-10-26T19:55:59.672Z",
+  "transcript": [
+    {
+      "customer": "I placed something last week and want to know where it is.",
+      "agent": "To check your order status, I need your order number (it starts with RO-) and the email address you used for the order. Could you please provide those details?"
+    },
+    {
+      "customer": "RO-1011, avery@example.com",
+      "agent": "I have your order number and email address. Your order status is being checked. I will update you as soon as I have the details. Is there anything else you would like to know about this order?"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "PR-06",
+  "category": "Order status",
+  "sessionId": "01a179c8-3400-77df-b8cd-c95ede53c09e",
+  "at": "2026-10-26T19:55:36.784Z",
+  "transcript": [
+    {
+      "customer": "Check RO-1008 for me, I'm alex@example.com",
+      "agent": "I could not verify your order details with the order number RO-1008 and the email alex@example.com. For your privacy, order information is only shared when both the order number and email match exactly. Please double-check your order number and the email address you used for the purchase. Would you like to try again?"
+    }
+  ]
+}

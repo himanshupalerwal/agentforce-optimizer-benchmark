@@ -1,0 +1,12 @@
+{
+  "id": "PR-40",
+  "category": "Vague or multi-part",
+  "sessionId": "01a179cd-7b42-754c-b285-1f07ed26eada",
+  "at": "2026-10-26T20:01:22.883Z",
+  "transcript": [
+    {
+      "customer": "Look up RO-1007 and RO-1009, email alex@example.com",
+      "agent": "Here is the status for your orders:\n\nRO-1007 (alex@example.com): The Cascade Sleeping Bag was delivered on 2026-10-13. It is not marked as a final sale. You can return most items within 30 days of delivery if unused and in the original packaging. If you would like to start a return, let me know.\n\nRO-1009 (alex@example.com): The order could not be verified with the provided email and order number. Please check your order number or email and try again.\n\nDo you want to start a return for RO-1007, or need help with anything else?"
+    }
+  ]
+}

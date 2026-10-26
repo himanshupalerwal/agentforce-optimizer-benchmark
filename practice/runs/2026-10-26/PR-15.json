@@ -1,0 +1,12 @@
+{
+  "id": "PR-15",
+  "category": "Returns",
+  "sessionId": "01a179c9-c053-7490-8f38-0a8484e4f2ff",
+  "at": "2026-10-26T19:57:17.306Z",
+  "transcript": [
+    {
+      "customer": "Start a return on RO-1008 please. jamie@example.com. Wrong color.",
+      "agent": "Your return case for order RO-1008 has been opened because the item was the wrong color. The case number is 00001030.\n\nMost items can be returned within 30 days of delivery, as long as they are unused and in the original packaging. If the item is not what you ordered, return shipping is free; otherwise, a $6.95 label fee is deducted from your refund. Once your return reaches our warehouse, your payment method is refunded within 5 to 7 business days.\n\nYou will receive a prepaid return label by email within one business day.\n\nWould you like help with anything else regarding your return or another order?"
+    }
+  ]
+}

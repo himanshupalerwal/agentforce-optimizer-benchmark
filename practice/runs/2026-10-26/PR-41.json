@@ -1,0 +1,12 @@
+{
+  "id": "PR-41",
+  "category": "Vague or multi-part",
+  "sessionId": "01a179cd-aa27-71c8-b148-29834ead486d",
+  "at": "2026-10-26T20:01:33.689Z",
+  "transcript": [
+    {
+      "customer": "Something about my purchase is wrong.",
+      "agent": "I can help check your purchase and see what went wrong. Please provide your order number (it starts with RO-) and the email address you used for the order. This information lets me look up the details and assist you further."
+    }
+  ]
+}

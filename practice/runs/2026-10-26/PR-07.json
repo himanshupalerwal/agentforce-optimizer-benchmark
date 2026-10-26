@@ -1,0 +1,12 @@
+{
+  "id": "PR-07",
+  "category": "Order status",
+  "sessionId": "01a179c8-61c3-718e-a4c6-761d78b514ac",
+  "at": "2026-10-26T19:55:46.568Z",
+  "transcript": [
+    {
+      "customer": "What happened to order RO-2041? avery@example.com",
+      "agent": "I could not verify your order details for RO-2041 with the email avery@example.com. For your privacy, order information is only shared when both the order number and email match exactly.\n\nPlease double-check your order number and email address. If you need help, let me know how I can assist further."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "PR-16",
+  "category": "Returns",
+  "sessionId": "01a179c9-eaca-7650-8d1e-28c98ca559eb",
+  "at": "2026-10-26T19:57:28.138Z",
+  "transcript": [
+    {
+      "customer": "Return the vest from order RO-1010, quinn@example.com",
+      "agent": "The Clearance Fleece Vest from order RO-1010 is marked as final sale, which means it cannot be returned according to our return policy. Final sale items are not eligible for returns or refunds.\n\nIs there anything else I can help you with regarding your order or another question?"
+    }
+  ]
+}

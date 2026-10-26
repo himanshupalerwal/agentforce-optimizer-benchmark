@@ -1,0 +1,12 @@
+{
+  "id": "PR-11",
+  "category": "Order status",
+  "sessionId": "01a179c9-0791-748b-999f-f6c609d1a914",
+  "at": "2026-10-26T19:56:29.116Z",
+  "transcript": [
+    {
+      "customer": "Order number RO-2077, jamie@example.com. When does it go out?",
+      "agent": "I could not retrieve the status for order RO-2077 with the email jamie@example.com. Please check that both the order number and email address match exactly what was used at checkout. If you need help, let me know if either detail might be different, or provide an alternate email or order number. How would you like to proceed?"
+    }
+  ]
+}

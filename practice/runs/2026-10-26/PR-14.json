@@ -1,0 +1,12 @@
+{
+  "id": "PR-14",
+  "category": "Returns",
+  "sessionId": "01a179c9-8671-75be-802b-0b6141142b4b",
+  "at": "2026-10-26T19:57:06.527Z",
+  "transcript": [
+    {
+      "customer": "I'd like a refund for the sleeping bag in RO-1007, it's too warm for me. alex@example.com",
+      "agent": "Your return request for the Cascade Sleeping Bag from order RO-1007 has been started. Your case number is 00001029. You will receive a prepaid return label by email within one business day.\n\nYou can return most items within 30 days of delivery as long as they are unused and have the original tags and packaging. Since your item was delivered 13 days ago and is not marked as final sale, it qualifies for return. A $6.95 fee for the return label will be deducted from your refund because the reason is personal preference.\n\nOnce your return arrives at our warehouse, your original payment method will be refunded within 5 to 7 business days.\n\nWould you like details on how to pack your return, or do you have other questions about the process?"
+    }
+  ]
+}

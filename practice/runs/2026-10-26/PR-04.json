@@ -1,0 +1,16 @@
+{
+  "id": "PR-04",
+  "category": "Order status",
+  "sessionId": "01a179c7-d2e2-7cc5-b8f1-72493f378029",
+  "at": "2026-10-26T19:55:15.202Z",
+  "transcript": [
+    {
+      "customer": "Need tracking info for a purchase.",
+      "agent": "To check your tracking info, I need your order number (it starts with RO-) and the email address used for the purchase. Can you provide both?"
+    },
+    {
+      "customer": "It's RO-1009 and drew@example.com",
+      "agent": "Your order RO-1009 is being processed. We received your order and are getting it ready to ship. Once it ships, you'll receive tracking information at drew@example.com.\n\nIs there anything else you would like to check about your order?"
+    }
+  ]
+}

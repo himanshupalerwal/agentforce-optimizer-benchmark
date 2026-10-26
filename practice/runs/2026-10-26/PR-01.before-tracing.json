@@ -1,0 +1,12 @@
+{
+  "id": "PR-01",
+  "category": "Order status",
+  "sessionId": "01a179b0-d94c-7b61-bdb4-263244c0d53c",
+  "at": "2026-10-26T19:30:10.123Z",
+  "transcript": [
+    {
+      "customer": "hey, any update on RO-1009? drew@example.com",
+      "agent": "I checked for an update on order RO-1009 with the email drew@example.com, but I could not find a match. Please confirm both the order number and the email address as they must match exactly for privacy reasons.\n\nWould you like to double-check your details or need help with something else?"
+    }
+  ]
+}

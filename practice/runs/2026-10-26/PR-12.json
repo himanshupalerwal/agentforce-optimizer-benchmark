@@ -1,0 +1,12 @@
+{
+  "id": "PR-12",
+  "category": "Order status",
+  "sessionId": "01a179c9-2df5-77a6-b608-bafb36a0aeed",
+  "at": "2026-10-26T19:56:37.894Z",
+  "transcript": [
+    {
+      "customer": "tracking says delivered but there's nothing at my door. RO-1007 / alex@example.com",
+      "agent": "The carrier has marked your order RO-1007 as delivered, but you have not received it. Sometimes packages are left in unexpected places or with neighbors. Please check around your home and ask neighbors if they received it by mistake.\n\nIf you still cannot find your order, contact us within 7 days so we can help. Would you like me to start a claim or connect you with support for further assistance?"
+    }
+  ]
+}

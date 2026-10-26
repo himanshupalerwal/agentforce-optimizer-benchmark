@@ -1,0 +1,12 @@
+{
+  "id": "PR-17",
+  "category": "Returns",
+  "sessionId": "01a179ca-148e-7359-b9e4-4d2f1785ab5c",
+  "at": "2026-10-26T19:57:37.945Z",
+  "transcript": [
+    {
+      "customer": "I'm going to send back RO-1009, drew@example.com",
+      "agent": "You can return most items within 30 days of the delivery date as long as they are unused and in the original packaging. Items marked final sale cannot be returned. Return shipping is free if the item arrived damaged or is not what you ordered; otherwise, a $6.95 label fee is deducted from your refund.\n\nI need to know the reason for your return to open a return case for order RO-1009 under drew@example.com. Please tell me why you are returning the item."
+    }
+  ]
+}

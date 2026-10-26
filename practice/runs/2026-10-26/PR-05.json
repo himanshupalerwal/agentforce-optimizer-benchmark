@@ -1,0 +1,12 @@
+{
+  "id": "PR-05",
+  "category": "Order status",
+  "sessionId": "01a179c8-0d9e-789d-b663-2be3db01272b",
+  "at": "2026-10-26T19:55:25.022Z",
+  "transcript": [
+    {
+      "customer": "RO-1012 status pls, parker@example.com",
+      "agent": "I could not verify your order using the order number RO-1012 and the email parker@example.com. Please check that both are correct and try again. If you need help, let me know how I can assist further."
+    }
+  ]
+}

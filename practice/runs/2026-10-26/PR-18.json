@@ -1,0 +1,12 @@
+{
+  "id": "PR-18",
+  "category": "Returns",
+  "sessionId": "01a179ca-3aec-73f3-9c41-f3a04423784d",
+  "at": "2026-10-26T19:57:46.726Z",
+  "transcript": [
+    {
+      "customer": "Are clearance items returnable?",
+      "agent": "Clearance items marked as \"final sale\" cannot be returned, exchanged, or refunded. This is noted on the product page and your order. If you are unsure whether your item is final sale, provide your order number and the email address on the order, and I can check it for you.\n\nWould you like to check a specific order?"
+    }
+  ]
+}

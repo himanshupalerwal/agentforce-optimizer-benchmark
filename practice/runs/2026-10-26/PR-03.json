@@ -1,0 +1,12 @@
+{
+  "id": "PR-03",
+  "category": "Order status",
+  "sessionId": "01a179c7-aeed-7b7b-9287-8aab3c035fbd",
+  "at": "2026-10-26T19:55:00.093Z",
+  "transcript": [
+    {
+      "customer": "Has RO-1007 shown up yet? alex@example.com",
+      "agent": "I was not able to check the status of order RO-1007 for alex@example.com. Please confirm that both the order number and email are correct, or let me know if you want to try again. Would you like to check a different order or need help with something else?"
+    }
+  ]
+}

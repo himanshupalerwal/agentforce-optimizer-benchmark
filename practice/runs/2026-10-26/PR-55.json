@@ -1,0 +1,12 @@
+{
+  "id": "PR-55",
+  "category": "Escalation",
+  "sessionId": "01a179cf-8f2d-7c8c-97e5-97de04c2570e",
+  "at": "2026-10-26T20:03:37.975Z",
+  "transcript": [
+    {
+      "customer": "Your bot is useless, transfer me.",
+      "agent": "I am transferring you to a human agent now. If you need urgent help or have a safety concern, please let me know so I can connect you right away. Is there anything else you would like to share while you wait?"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "PR-24",
+  "category": "Returns",
+  "sessionId": "01a179cb-48c2-772d-8be7-34213699c7ad",
+  "at": "2026-10-26T19:58:57.904Z",
+  "transcript": [
+    {
+      "customer": "Can I swap the shoes from RO-1008 for a bigger size? jamie@example.com",
+      "agent": "Your order RO-1008 for the Trail Runner Shoes was delivered 42 days ago. According to the return policy, most items can be returned within 30 days of delivery, as long as they are unused and in the original packaging. Since it has been more than 30 days, a size swap or return is not allowed for this order.\n\nIs there anything else I can help you with regarding your order or our products?"
+    }
+  ]
+}

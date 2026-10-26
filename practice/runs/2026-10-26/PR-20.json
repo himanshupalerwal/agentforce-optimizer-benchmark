@@ -1,0 +1,16 @@
+{
+  "id": "PR-20",
+  "category": "Returns",
+  "sessionId": "01a179ca-8760-736f-8b91-a8fd47324c75",
+  "at": "2026-10-26T19:58:12.625Z",
+  "transcript": [
+    {
+      "customer": "I need to return RO-1007",
+      "agent": "To start your return for order RO-1007, I'll need the email address you used for the order and a brief reason for the return. Once I have that, I can open a return case for you and provide the next steps.\n\nCould you please provide your email and the reason for your return?"
+    },
+    {
+      "customer": "alex@example.com, the zipper is stuck",
+      "agent": "I've started your return for order RO-1007. Since the issue is a stuck zipper, your reason is noted. You will receive further instructions by email at alex@example.com.\n\nIs there anything else you would like help with regarding your return or another order?"
+    }
+  ]
+}

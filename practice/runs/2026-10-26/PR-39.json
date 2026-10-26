@@ -1,0 +1,12 @@
+{
+  "id": "PR-39",
+  "category": "Vague or multi-part",
+  "sessionId": "01a179cd-51cd-7825-8821-c2da4aa36df1",
+  "at": "2026-10-26T20:01:11.068Z",
+  "transcript": [
+    {
+      "customer": "Where's RO-1011 (avery@example.com), and is shipping free?",
+      "agent": "For order RO-1011 (avery@example.com), I do not have the specific order status available at this moment. You should have received a tracking email when your order shipped, which will provide the latest status and tracking details.\n\nShipping is free for orders over $75. If your order total is $75 or less, standard shipping costs $5.95. Expedited shipping is available for $14.95.\n\nWould you like help with tracking your order, or do you have your order total to check if shipping was free?"
+    }
+  ]
+}

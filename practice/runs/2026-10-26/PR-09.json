@@ -1,0 +1,12 @@
+{
+  "id": "PR-09",
+  "category": "Order status",
+  "sessionId": "01a179c8-bb61-78ab-a4cb-946aace3b565",
+  "at": "2026-10-26T19:56:09.483Z",
+  "transcript": [
+    {
+      "customer": "Is RO-1010 here yet? quinn@example.com is what I signed up with",
+      "agent": "Order RO-1010 for quinn@example.com has been delivered. The order was delivered on 2026-10-20. If you cannot find your package, check around your home and with neighbors, then contact us within 7 days of the delivery date.\n\nIs there anything else I can help you with regarding your order?"
+    }
+  ]
+}

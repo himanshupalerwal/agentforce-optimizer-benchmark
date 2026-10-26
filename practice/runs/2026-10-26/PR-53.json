@@ -1,0 +1,12 @@
+{
+  "id": "PR-53",
+  "category": "Escalation",
+  "sessionId": "01a179cf-3e27-7d63-b123-129327b646e5",
+  "at": "2026-10-26T20:03:15.255Z",
+  "transcript": [
+    {
+      "customer": "Connect me with an agent.",
+      "agent": "I am connecting you with a customer care agent now. If you have any details to share about your request, please provide them so the agent can assist you more efficiently."
+    }
+  ]
+}
