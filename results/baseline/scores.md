@@ -1,7 +1,7 @@
 # Baseline results: automated scores
 
 Scored by `scripts/score-results.mjs` from the raw Testing Center files in this folder.
-These are automated scores, before the human review of the AI-judged answers.
+The answer check is AI-judged. Accepted human overrides are applied; proposed ones are not.
 
 | Category | Questions | Run 1 | Run 2 | Run 3 | Passed (2 of 3 runs) |
 | --- | --- | --- | --- | --- | --- |
@@ -12,6 +12,21 @@ These are automated scores, before the human review of the AI-judged answers.
 | Off-topic | 4 | 3 | 2 | 4 | 3 |
 | Escalation | 4 | 3 | 3 | 3 | 3 |
 | **Total** | **30** | **18** | **16** | **16** | **16** |
+
+## Human overrides of the answer check
+
+0 accepted and applied, 8 proposed and not applied. See overrides.csv.
+
+| ID | Run | Judge | Override | Status |
+| --- | --- | --- | --- | --- |
+| OT-02 | 2 | Fail | Pass | proposed |
+| OT-03 | 1 | Fail | Pass | proposed |
+| OT-03 | 2 | Fail | Pass | proposed |
+| VM-04 | 3 | Fail | Pass | proposed |
+| ES-04 | 1 | Pass | Fail | proposed |
+| RT-05 | 2 | Pass | Fail | proposed |
+| VM-03 | 2 | Pass | Fail | proposed |
+| VM-02 | 2 | Pass | Fail | proposed |
 
 ## Every failed check
 

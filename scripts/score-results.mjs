@@ -27,7 +27,7 @@ export function recordedActions(generatedData) {
   return [...new Set(raw.flat(Infinity).map(a => a?.function?.name).filter(Boolean))].sort();
 }
 
-export function scoreCase(row, testCase) {
+export function scoreCase(row, testCase, answerOverride) {
   const g = testCase.generatedData ?? {};
   const topic = g.topic ?? '';
   const topics = [SUBAGENT_API_NAMES[row.expected_subagent], ...(EXTRA_TOPICS[row.id] ?? [])];
@@ -36,7 +36,7 @@ export function scoreCase(row, testCase) {
   const got = recordedActions(g);
   const actionOk = JSON.stringify(want) === JSON.stringify(got);
   const answer = testCase.testResults.find(r => r.name === 'output_validation' || r.name === 'bot_response_rating');
-  const answerOk = answer?.result === 'PASS';
+  const answerOk = answerOverride ?? answer?.result === 'PASS';
   const failed = [!subagentOk && `subagent (${topic || 'none'})`, !actionOk && `action (got ${got.join('+') || 'none'}, want ${want.join('+') || 'none'})`, !answerOk && 'answer'].filter(Boolean);
   return { pass: failed.length === 0, failed, topic, got };
 }
@@ -49,8 +49,17 @@ function loadRun(phase, n) {
   return JSON.parse(readFileSync(join(dir, files[0]), 'utf8'));
 }
 
+// Human overrides of the AI-judged answer check, from results/<phase>/overrides.csv.
+// Only rows marked "accepted" are applied; "proposed" rows are listed, not applied.
+export function loadOverrides(phase) {
+  const f = join(ROOT, 'results', phase, 'overrides.csv');
+  if (!existsSync(f)) return [];
+  return parseCsv(readFileSync(f, 'utf8')).rows.map(o => ({ ...o, run: Number(o.run) }));
+}
+
 export function score(phase) {
   const { rows } = parseCsv(readFileSync(join(ROOT, 'test-set/test-set.csv'), 'utf8'));
+  const overrides = loadOverrides(phase);
   const runs = [1, 2, 3].map(n => loadRun(phase, n));
   const results = rows.map((row, i) => {
     const perRun = runs.map(run => {
@@ -58,15 +67,17 @@ export function score(phase) {
       const tc = run.testCases.find(t => t.testNumber === i + 1);
       if (!tc) throw new Error(`${row.id}: missing from a run`);
       if (tc.inputs?.utterance !== row.customer_says) throw new Error(`${row.id}: utterance in the run does not match the test set`);
-      return scoreCase(row, tc);
+      const k = runs.indexOf(run) + 1;
+      const o = overrides.find(x => x.id === row.id && x.run === k && x.status === 'accepted');
+      return scoreCase(row, tc, o ? o.override === 'Pass' : undefined);
     });
     const passes = perRun.filter(r => r?.pass).length;
     return { row, perRun, overall: passes >= 2 };
   });
-  return { runs, results };
+  return { runs, results, overrides };
 }
 
-function write(phase, { runs, results }) {
+function write(phase, { runs, results, overrides }) {
   const dir = join(ROOT, 'results', phase);
   const pf = r => (r ? (r.pass ? 'Pass' : 'Fail') : '');
   const esc = s => (/[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s);
@@ -86,7 +97,7 @@ function write(phase, { runs, results }) {
     `# ${phase === 'baseline' ? 'Baseline' : 'After'} results: automated scores`,
     '',
     `Scored by \`scripts/score-results.mjs\` from the raw Testing Center files in this folder.`,
-    'These are automated scores, before the human review of the AI-judged answers.',
+    'The answer check is AI-judged. Accepted human overrides are applied; proposed ones are not.',
     '',
     '| Category | Questions | Run 1 | Run 2 | Run 3 | Passed (2 of 3 runs) |',
     '| --- | --- | --- | --- | --- | --- |',
@@ -96,6 +107,11 @@ function write(phase, { runs, results }) {
     }),
     `| **Total** | **${results.length}** | ${[0, 1, 2].map(k => (runs[k] ? `**${count(results, k)}**` : '')).join(' | ')} | **${results.filter(r => r.overall).length}** |`,
     '',
+    '## Human overrides of the answer check',
+    '',
+    overrides.length ? `${overrides.filter(o => o.status === 'accepted').length} accepted and applied, ${overrides.filter(o => o.status !== 'accepted').length} proposed and not applied. See overrides.csv.` : 'None.',
+    '',
+    ...(overrides.length ? ['| ID | Run | Judge | Override | Status |', '| --- | --- | --- | --- | --- |', ...overrides.map(o => `| ${o.id} | ${o.run} | ${o.judge} | ${o.override} | ${o.status} |`), ''] : []),
     '## Every failed check',
     '',
     '| ID | Run | Failed checks |',

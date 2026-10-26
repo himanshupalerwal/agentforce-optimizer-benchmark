@@ -14,11 +14,12 @@ results/
     run-3/test-result-<id>.json
     scoring-sheet.csv            filled in by npm run score -- baseline
     scores.md                    per-category table and every failed check
+    overrides.csv                AI-judged answers overruled by hand, and why
   after/                         the agent after applying Optimizer's recommendations
     run-1/ run-2/ run-3/         the same layout
     scoring-sheet.csv
     scores.md
-  overrides.md                   every AI-judged answer overruled by hand, and why
+    overrides.csv
   recommendations.md             each Optimizer recommendation, applied or not, and why
 ```
 
@@ -33,7 +34,7 @@ npm run score -- baseline
 Rules for this folder:
 
 - Raw exports go in exactly as Testing Center produced them. Corrections go
-  in the scoring sheet's notes column and in `overrides.md`, never in the
+  in the scoring sheet's notes column and in `overrides.csv`, never in the
   raw file.
 - Before committing, remove anything that identifies the org or a real
   person, such as org IDs, usernames, or instance URLs.

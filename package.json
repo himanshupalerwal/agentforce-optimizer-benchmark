@@ -9,6 +9,7 @@
   "scripts": {
     "check": "node scripts/check-consistency.mjs",
     "score": "node scripts/score-results.mjs",
+    "practice": "node scripts/run-practice.mjs",
     "build:knowledge": "node scripts/build-knowledge-apex.mjs",
     "build:test-spec": "node scripts/build-test-spec.mjs",
     "deploy": "sf project deploy start --source-dir force-app",

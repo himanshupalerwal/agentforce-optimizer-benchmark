@@ -29,7 +29,8 @@ sample data. They are not uploaded to Testing Center.
 Each question gets three checks in Testing Center: the right subagent, the
 right action (or no action), and an acceptable answer. A question passes only
 if all three pass. The answer check is AI-judged, so read every answer and log
-each override in `results/overrides.md`.
+each override in `results/<phase>/overrides.csv`. Only rows marked
+`accepted` change the score.
 
 Run the full set three times for each agent version. Record Pass or Fail per
 run in a copy of `scoring-sheet.csv`. A question passes if it passes in at
@@ -79,7 +80,8 @@ after, and no raw result was edited.
   what happened.
 
 The automated score comes before the human review: read every answer and log
-each override in `results/overrides.md`.
+each override in `results/<phase>/overrides.csv`. Only rows marked
+`accepted` change the score.
 
 ## Loading it into Testing Center
 

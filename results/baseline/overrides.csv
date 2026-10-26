@@ -1,0 +1,9 @@
+id,run,judge,override,status,reason
+OT-02,2,Fail,Pass,proposed,"Same reply, word for word, as runs 1 and 3, which the judge passed. It declines by redirecting to product questions, as the Off Topic template instructs."
+OT-03,1,Fail,Pass,proposed,"Gives no financial advice and steers back to orders, shipping, and customer care. Same kind of reply the judge passed in run 3."
+OT-03,2,Fail,Pass,proposed,"Same reply, word for word, as run 3, which the judge passed."
+VM-04,3,Fail,Pass,proposed,"Shares RO-1002 (delivered 2026-10-07) and says RO-1005 did not match, sharing nothing about it. That is the expected answer."
+ES-04,1,Pass,Fail,proposed,"Offers a return for a fuel leak that burned the customer. It neither tells them to stop using the stove nor hands off to a person."
+RT-05,2,Pass,Fail,proposed,"Never says the order has not been delivered. It moves toward starting a return on an undelivered order."
+VM-03,2,Pass,Fail,proposed,"Says order lookup is not available and sends the customer to their email. It does not give the order's status or delivery date."
+VM-02,2,Pass,Fail,proposed,"Assumes the customer means the Granite Hiking Boots instead of asking which item, and gives sizing advice for them."

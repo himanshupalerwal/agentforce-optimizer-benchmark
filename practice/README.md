@@ -19,11 +19,21 @@ script. Order numbers in the RO-20xx range do not exist on purpose.
 | `id` | `PR-01` to `PR-60` |
 | `category` | The same six categories as the test set |
 | `customer_turn_1` | The customer's opening message |
-| `customer_turn_2` | A follow-up, sent only if the agent asks for it. Usually empty. |
+| `customer_turn_2` | A follow-up, usually the details the agent asks for. The runner sends it as the second message. Usually empty. |
 | `lookup_result`, `return_decision` | What a correct agent would get and decide, recomputed from the sample data by `npm run check` |
 
 ## Using them
 
-Run each conversation against the agent so the sessions exist for Optimizer
-to analyze. Then point Optimizer at those sessions. Never point it at the test
-set, and never upload `test-set/test-set.csv` anywhere Optimizer can read it.
+1. Turn on session tracing: Setup, Einstein Audit, Analytics, and Monitoring
+   Setup. Select the default data space and turn on Agentforce Session
+   Tracing. Without it, conversations leave no record for Optimizer.
+2. Run all 60 against the published agent, one session each:
+
+   ```bash
+   npm run practice -- <target-org>
+   ```
+
+   The script runs `npm run check` first and refuses to send a line that
+   matches a test question. Each transcript is saved under `practice/runs/`.
+3. Point Optimizer at those sessions. Never point it at the test set, and
+   never upload `test-set/test-set.csv` anywhere Optimizer can read it.
