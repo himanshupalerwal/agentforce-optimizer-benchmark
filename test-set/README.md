@@ -39,9 +39,35 @@ least two of the three runs:
 =IF(COUNTIF(C2:E2,"Pass")>=2,"Pass","Fail")
 ```
 
+## How a run is scored
+
+The rule below was fixed before the first baseline run.
+
+| Check | Passes when |
+| --- | --- |
+| Subagent | The subagent Testing Center reports contains the expected API name |
+| Action | The set of actions the agent invoked is exactly the expected set. Order and repeats are ignored. "None" means no action at all. |
+| Answer | Testing Center's AI-judged response rating passes |
+
+A question passes a run only if all three checks pass. It passes overall if it
+passes in at least two of the three runs.
+
+The action check is stricter than Testing Center's own. Testing Center only
+checks that the expected actions appear, so it would pass RT-04 even if the
+agent opened a return case it should not have. `npm run score` reads the
+actions each run actually invoked from the raw results and applies the exact
+rule above. The raw results stay untouched.
+
+The automated score comes before the human review: read every answer and log
+each override in `results/overrides.md`.
+
 ## Loading it into Testing Center
 
-Download the CSV template from your org's Testing Center and copy the
+`testing-center-spec.yaml` is the same 30 questions in the format the
+Salesforce CLI uploads (`sf agent test create`), with the agent's API names.
+`npm run build:test-spec` regenerates it from the CSV.
+
+To use the Testing Center UI instead, download the CSV template from your org's Testing Center and copy the
 `customer_says`, `expected_subagent`, `expected_action` and `expected_answer`
 columns across. Column names differ between the legacy Testing Center in Setup
 and the newer one in Agentforce Studio, so always start from the template your

@@ -15,6 +15,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, SUMMARY_LIMIT, parseCsv, readArticles } from './lib.mjs';
 import { buildKnowledgeApex, OUTPUT as KNOWLEDGE_APEX } from './build-knowledge-apex.mjs';
+import { buildSpec, OUTPUT as TEST_SPEC, SUBAGENT_API_NAMES, ACTION_API_NAMES } from './build-test-spec.mjs';
 
 const read = p => readFileSync(join(ROOT, p), 'utf8');
 const failures = [];
@@ -189,6 +190,8 @@ for (const [id, trap] of Object.entries(TRAPS)) {
   if (trap.decision) check(r.return_decision === trap.decision, `${id}: decision must be ${trap.decision}`);
   for (const re of trap.answer) check(re.test(r.expected_answer), `${id}: expected answer must match ${re}`);
 }
+check(existsSync(TEST_SPEC) && readFileSync(TEST_SPEC, 'utf8') === buildSpec(), 'testing-center-spec.yaml is out of date; run `npm run build:test-spec`');
+check(SUBAGENTS.every(n => SUBAGENT_API_NAMES[n]) && ACTIONS.filter(a => a !== 'None').every(a => ACTION_API_NAMES[a]), 'every subagent and action name needs an API name in build-test-spec.mjs');
 done();
 
 // ── 4. Practice conversations ──────────────────────────────────────────────

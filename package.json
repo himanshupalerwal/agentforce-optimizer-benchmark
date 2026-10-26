@@ -9,6 +9,7 @@
   "scripts": {
     "check": "node scripts/check-consistency.mjs",
     "build:knowledge": "node scripts/build-knowledge-apex.mjs",
+    "build:test-spec": "node scripts/build-test-spec.mjs",
     "deploy": "sf project deploy start --source-dir force-app",
     "deploy:data-cloud": "sf project deploy start --source-dir data-cloud",
     "test:apex": "sf apex run test --class-names StoreOrderFlowsTest --result-format human --wait 10",
