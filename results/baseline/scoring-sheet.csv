@@ -9,7 +9,7 @@ RT-01,Returns,Pass,Pass,Pass,"=IF(COUNTIF(C8:E8,""Pass"")>=2,""Pass"",""Fail"")"
 RT-02,Returns,Pass,Fail,Fail,"=IF(COUNTIF(C9:E9,""Pass"")>=2,""Pass"",""Fail"")","R2: action (got create_return_case, want create_return_case+get_order_status) | R3: action (got create_return_case, want create_return_case+get_order_status)"
 RT-03,Returns,Fail,Fail,Pass,"=IF(COUNTIF(C10:E10,""Pass"")>=2,""Pass"",""Fail"")","R1: action (got none, want get_order_status); answer | R2: action (got none, want get_order_status); answer"
 RT-04,Returns,Pass,Pass,Pass,"=IF(COUNTIF(C11:E11,""Pass"")>=2,""Pass"",""Fail"")",
-RT-05,Returns,Fail,Fail,Fail,"=IF(COUNTIF(C12:E12,""Pass"")>=2,""Pass"",""Fail"")","R1: action (got none, want get_order_status); answer | R2: action (got none, want get_order_status) | R3: action (got none, want get_order_status); answer"
+RT-05,Returns,Fail,Fail,Fail,"=IF(COUNTIF(C12:E12,""Pass"")>=2,""Pass"",""Fail"")","R1: action (got none, want get_order_status); answer | R2: action (got none, want get_order_status); answer | R3: action (got none, want get_order_status); answer"
 RT-06,Returns,Pass,Pass,Pass,"=IF(COUNTIF(C13:E13,""Pass"")>=2,""Pass"",""Fail"")",
 PQ-01,Product questions,Fail,Fail,Fail,"=IF(COUNTIF(C14:E14,""Pass"")>=2,""Pass"",""Fail"")",R1: subagent (topic_selector) | R2: subagent (topic_selector) | R3: subagent (topic_selector)
 PQ-02,Product questions,Fail,Fail,Fail,"=IF(COUNTIF(C15:E15,""Pass"")>=2,""Pass"",""Fail"")",R1: subagent (topic_selector) | R2: subagent (topic_selector) | R3: subagent (topic_selector)
@@ -18,15 +18,15 @@ PQ-04,Product questions,Fail,Fail,Fail,"=IF(COUNTIF(C17:E17,""Pass"")>=2,""Pass"
 PQ-05,Product questions,Pass,Pass,Pass,"=IF(COUNTIF(C18:E18,""Pass"")>=2,""Pass"",""Fail"")",
 PQ-06,Product questions,Pass,Pass,Pass,"=IF(COUNTIF(C19:E19,""Pass"")>=2,""Pass"",""Fail"")",
 VM-01,Vague or multi-part,Pass,Pass,Pass,"=IF(COUNTIF(C20:E20,""Pass"")>=2,""Pass"",""Fail"")",
-VM-02,Vague or multi-part,Fail,Fail,Fail,"=IF(COUNTIF(C21:E21,""Pass"")>=2,""Pass"",""Fail"")",R1: subagent (product_help) | R2: subagent (product_help) | R3: subagent (returns)
-VM-03,Vague or multi-part,Fail,Fail,Fail,"=IF(COUNTIF(C22:E22,""Pass"")>=2,""Pass"",""Fail"")","R1: subagent (product_help); action (got none, want get_order_status); answer | R2: subagent (product_help); action (got none, want get_order_status) | R3: subagent (product_help); action (got none, want get_order_status); answer"
-VM-04,Vague or multi-part,Pass,Pass,Fail,"=IF(COUNTIF(C23:E23,""Pass"")>=2,""Pass"",""Fail"")",R3: answer
+VM-02,Vague or multi-part,Fail,Fail,Fail,"=IF(COUNTIF(C21:E21,""Pass"")>=2,""Pass"",""Fail"")",R1: subagent (product_help) | R2: subagent (product_help); answer | R3: subagent (returns)
+VM-03,Vague or multi-part,Fail,Fail,Fail,"=IF(COUNTIF(C22:E22,""Pass"")>=2,""Pass"",""Fail"")","R1: subagent (product_help); action (got none, want get_order_status); answer | R2: subagent (product_help); action (got none, want get_order_status); answer | R3: subagent (product_help); action (got none, want get_order_status); answer"
+VM-04,Vague or multi-part,Pass,Pass,Pass,"=IF(COUNTIF(C23:E23,""Pass"")>=2,""Pass"",""Fail"")",
 OT-01,Off-topic,Pass,Pass,Pass,"=IF(COUNTIF(C24:E24,""Pass"")>=2,""Pass"",""Fail"")",
-OT-02,Off-topic,Pass,Fail,Pass,"=IF(COUNTIF(C25:E25,""Pass"")>=2,""Pass"",""Fail"")",R2: answer
-OT-03,Off-topic,Fail,Fail,Pass,"=IF(COUNTIF(C26:E26,""Pass"")>=2,""Pass"",""Fail"")",R1: answer | R2: answer
+OT-02,Off-topic,Pass,Pass,Pass,"=IF(COUNTIF(C25:E25,""Pass"")>=2,""Pass"",""Fail"")",
+OT-03,Off-topic,Pass,Pass,Pass,"=IF(COUNTIF(C26:E26,""Pass"")>=2,""Pass"",""Fail"")",
 OT-04,Off-topic,Pass,Pass,Pass,"=IF(COUNTIF(C27:E27,""Pass"")>=2,""Pass"",""Fail"")",
 ES-01,Escalation,Pass,Pass,Pass,"=IF(COUNTIF(C28:E28,""Pass"")>=2,""Pass"",""Fail"")",
 ES-02,Escalation,Pass,Pass,Pass,"=IF(COUNTIF(C29:E29,""Pass"")>=2,""Pass"",""Fail"")",
 ES-03,Escalation,Pass,Pass,Pass,"=IF(COUNTIF(C30:E30,""Pass"")>=2,""Pass"",""Fail"")",
-ES-04,Escalation,Fail,Fail,Fail,"=IF(COUNTIF(C31:E31,""Pass"")>=2,""Pass"",""Fail"")",R1: subagent (returns) | R2: subagent (returns); answer | R3: subagent (returns); answer
+ES-04,Escalation,Fail,Fail,Fail,"=IF(COUNTIF(C31:E31,""Pass"")>=2,""Pass"",""Fail"")",R1: subagent (returns); answer | R2: subagent (returns); answer | R3: subagent (returns); answer
 TOTAL PASSED,,"=COUNTIF(C2:C31,""Pass"")","=COUNTIF(D2:D31,""Pass"")","=COUNTIF(E2:E31,""Pass"")","=COUNTIF(F2:F31,""Pass"")",
