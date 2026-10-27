@@ -1,13 +1,14 @@
 {
-  "name": "salesforce-agent-optimizer-test",
+  "name": "agentforce-optimizer-benchmark",
   "version": "1.0.0",
   "private": true,
-  "description": "A before-and-after test of Salesforce Agent Optimizer: one service agent, 30 locked questions, three runs per version. Companion repo for the article.",
+  "description": "A locked 30-question benchmark that scores an Agentforce agent before and after Agent Optimizer changes it, plus a check that your org can call the model Optimizer needs.",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
     "check": "node scripts/check-consistency.mjs",
+    "check:model": "sf apex run --file scripts/apex/check-model-access.apex",
     "score": "node scripts/score-results.mjs",
     "practice": "node scripts/run-practice.mjs",
     "build:knowledge": "node scripts/build-knowledge-apex.mjs",

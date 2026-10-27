@@ -1,6 +1,13 @@
-# Before you trust Agent Optimizer, build this test
+# Agentforce Optimizer Benchmark
 
-**One ordinary service agent. Thirty locked questions. Three runs before, three runs after.**
+[![Consistency check](https://github.com/himanshupalerwal/agentforce-optimizer-benchmark/actions/workflows/check.yml/badge.svg)](https://github.com/himanshupalerwal/agentforce-optimizer-benchmark/actions/workflows/check.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+**A locked 30-question test that scores an Agentforce agent before and after
+Agent Optimizer changes it, plus a one-minute check that your org can call
+the model Optimizer needs.**
+
+One ordinary service agent. Thirty locked questions. Three runs before, three runs after.
 
 Companion repo for **"Before You Trust Agent Optimizer: Build This Test, and
 Check the Model Limit First"** by [Himanshu Palerwal](https://linkedin.com/in/himanshupalerwal),
@@ -18,7 +25,22 @@ why: Agent Optimizer reasons with Claude Opus, and in both orgs Salesforce's
 gateway refused Opus with a limit of **zero**, naming the org as Free or Trial.
 Everything here is ready to run the after half in an org that can call Opus.
 
+### At a glance
+
+| Measure | Result |
+| --- | --- |
+| Day-one agent, graded on route, actions and answer | **17 of 30** |
+| Same runs, graded on the answer alone | **24 of 30** |
+| Questions that flipped with no change to the agent | **5**, all order lookups |
+| Claude Opus calls allowed in the free and trial orgs tested | **0** (`limit=0`) |
+
 > An agent change is only an improvement if the same test says so, before and after.
+
+**Contents:** [What's here](#whats-here) ·
+[What makes the test fair](#what-makes-the-test-fair) ·
+[Quick start](#quick-start) · [Running the test](#running-the-test) ·
+[Results](#results) · [Lessons](#what-building-this-taught-me) ·
+[Repo layout](#repo-layout) · [Verify everything](#verify-everything)
 
 ---
 
@@ -79,7 +101,7 @@ The 30-day return window lands the same way every time.
 
 **Check the model first.** Agent Optimizer reasons with Claude Opus, which
 was limited to zero calls in the Developer Edition and trial orgs I tested. Run
-`sf apex run --file scripts/apex/check-model-access.apex` in your org before
+`npm run check:model -- --target-org <your-org>` before
 anything else: if Opus is refused with `limit=0`, Optimizer has no model to
 reason with there.
 
@@ -96,7 +118,8 @@ Opus answering: a sandbox of a paid Agentforce org is the likely fit.
 > org before every deploy.
 
 ```bash
-git clone <this-repo> && cd salesforce-agent-optimizer-test
+git clone https://github.com/himanshupalerwal/agentforce-optimizer-benchmark.git
+cd agentforce-optimizer-benchmark
 npm run check                          # offline: everything agrees (no org needed)
 
 sf org login web --alias optimizer-test
@@ -184,8 +207,12 @@ The totals hide two things, and `npm run score` prints both:
 ![Answers alone versus the full grade](docs/images/answers.png)
 
 **Why the after half did not run.** Agent Optimizer was turned on and its
-Setup was complete, but every question to Ask Optimizer failed. Its own model
-calls go to Claude Opus 4.8, and Salesforce's model gatekeeper refuses them:
+Setup was complete, but every question to Ask Optimizer failed.
+
+![Ask Optimizer failing next to a working Agent Analytics page](docs/images/ask-optimizer-error.png)
+
+Its own model calls go to Claude Opus 4.8, and Salesforce's model gatekeeper
+refuses them:
 
 ```
 429 LLM_GATEKEEPER  limit=0, remaining=0 ... org_status:Free & model:advanced-models
@@ -200,7 +227,7 @@ your org reports.
 
 ---
 
-## What building this taught us
+## What building this taught me
 
 **Agent Optimizer depends on a model your org may not be allowed to call.**
 The Setup switch appears in a Developer Edition org, but Optimizer reasons
@@ -283,7 +310,7 @@ npm run build:knowledge       # regenerate the knowledge loader after editing kn
 npm run build:test-spec       # regenerate the Testing Center spec after editing the test set
 npm run test:apex             # the flow tests, in your org
 npm run score -- baseline     # score the raw baseline results, with reviewed overrides
-sf apex run --file scripts/apex/check-model-access.apex   # can this org run Optimizer?
+npm run check:model           # can this org call the model Optimizer needs?
 ```
 
 `npm run check` recomputes every expected lookup and return decision in the

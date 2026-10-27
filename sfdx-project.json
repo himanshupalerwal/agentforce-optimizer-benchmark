@@ -9,7 +9,7 @@
       "default": false
     }
   ],
-  "name": "salesforce-agent-optimizer-test",
+  "name": "agentforce-optimizer-benchmark",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "67.0"
