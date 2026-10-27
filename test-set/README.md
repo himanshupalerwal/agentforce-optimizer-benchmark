@@ -53,11 +53,10 @@ The rule below was fixed before the first baseline run.
 A question passes a run only if all three checks pass. It passes overall if it
 passes in at least two of the three runs.
 
-The action check is stricter than Testing Center's own. Testing Center only
-checks that the expected actions appear, so it would pass RT-04 even if the
-agent opened a return case it should not have. `npm run score` reads the
-actions each run actually invoked from the raw results and applies the exact
-rule above. The raw results stay untouched.
+The action check does not rely on Testing Center's own action check.
+`npm run score` reads the actions each run actually invoked from the raw
+results and applies the exact-set rule above, so an extra return case on RT-04
+would count as a failure. The raw results stay untouched.
 
 ### Changed after Run 1 of the baseline
 

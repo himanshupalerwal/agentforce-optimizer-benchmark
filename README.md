@@ -197,9 +197,9 @@ template's escalation step never appear in a run's invoked actions, even when
 the answer clearly comes from them. Expect them, and those questions fail every
 run whatever the agent does.
 
-**Testing Center's action check cannot catch an extra action.** It confirms the
-expected actions ran; it does not fail a run that also opened a case it should
-not have. `npm run score` checks the exact set from the raw results instead.
+**Score the exact set of actions.** Rather than rely on Testing Center's own
+action check, `npm run score` compares the exact set of actions each run
+invoked in the raw results, so an extra return case counts as a failure.
 
 **The AI judge needs a human.** It scored word-for-word identical answers
 differently in different runs. Without review, the baseline reads 16 instead
