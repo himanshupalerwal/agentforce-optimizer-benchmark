@@ -77,6 +77,26 @@ export function score(phase) {
   return { runs, results, overrides };
 }
 
+// What the totals hide: questions that flipped between runs, the score on the
+// answer check alone, and which checks the failed runs failed.
+export function hidden(runs, results) {
+  if (runs.some(r => !r)) return [];
+  const flips = results.filter(r => new Set(r.perRun.map(x => x.pass)).size > 1).map(r => r.row.id);
+  const answerOk = x => !x.failed.includes('answer');
+  const perRunAnswer = [0, 1, 2].map(k => results.filter(r => answerOk(r.perRun[k])).length);
+  const answerOnly = results.filter(r => r.perRun.filter(answerOk).length >= 2).length;
+  const failedRuns = results.flatMap(r => r.perRun.filter(x => !x.pass));
+  const has = (x, w) => x.failed.some(f => f.startsWith(w));
+  return [
+    '## What the totals hide',
+    '',
+    `- **Flipped with no change to the agent:** ${flips.length} (${flips.join(', ') || 'none'}).`,
+    `- **Graded on the answer check alone:** ${answerOnly} of ${results.length} pass in at least two of three runs (runs: ${perRunAnswer.join(', ')}).`,
+    `- **Failed runs:** ${failedRuns.length}. With a routing failure: ${failedRuns.filter(x => has(x, 'subagent')).length}. With an action failure: ${failedRuns.filter(x => has(x, 'action')).length}. Failed on the answer alone: ${failedRuns.filter(x => x.failed.length === 1 && x.failed[0] === 'answer').length}.`,
+    '',
+  ];
+}
+
 function write(phase, { runs, results, overrides }) {
   const dir = join(ROOT, 'results', phase);
   const pf = r => (r ? (r.pass ? 'Pass' : 'Fail') : '');
@@ -107,6 +127,7 @@ function write(phase, { runs, results, overrides }) {
     }),
     `| **Total** | **${results.length}** | ${[0, 1, 2].map(k => (runs[k] ? `**${count(results, k)}**` : '')).join(' | ')} | **${results.filter(r => r.overall).length}** |`,
     '',
+    ...hidden(runs, results),
     '## Human overrides of the answer check',
     '',
     overrides.length ? `${overrides.filter(o => o.status === 'accepted').length} accepted and applied, ${overrides.filter(o => o.status !== 'accepted').length} proposed and not applied. See overrides.csv.` : 'None.',

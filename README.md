@@ -1,9 +1,9 @@
-# Does Agent Optimizer actually make your agent better?
+# Before you trust Agent Optimizer, build this test
 
 **One ordinary service agent. Thirty locked questions. Three runs before, three runs after.**
 
-Companion repo for **"Does Agent Optimizer Actually Make Your Agent Better? A
-Before-and-After Test"** by [Himanshu Palerwal](https://linkedin.com/in/himanshupalerwal),
+Companion repo for **"Before You Trust Agent Optimizer: Build This Test, and
+Check the Model Limit First"** by [Himanshu Palerwal](https://linkedin.com/in/himanshupalerwal),
 on Salesforce Trail (article link coming soon).
 
 Agent Optimizer reads an Agentforce agent's conversations, finds what is going
@@ -13,10 +13,10 @@ problems, and score it again. Same questions. Same rules. Only the agent
 changes.
 
 The "before" is done: the day-one agent passes **17 of 30** questions. The
-"after" is blocked in free and trial orgs, and this repo shows why: Agent
-Optimizer reasons with Claude Opus, and Salesforce limits Opus to **zero calls**
-in orgs it marks Free or Trial. Everything here is ready to run the after half
-in an org that can call Opus.
+"after" was blocked in the free and trial orgs I tested, and this repo shows
+why: Agent Optimizer reasons with Claude Opus, and in both orgs Salesforce's
+gateway refused Opus with a limit of **zero**, naming the org as Free or Trial.
+Everything here is ready to run the after half in an org that can call Opus.
 
 > An agent change is only an improvement if the same test says so, before and after.
 
@@ -78,9 +78,10 @@ The 30-day return window lands the same way every time.
 ## Quick start
 
 **Check the model first.** Agent Optimizer reasons with Claude Opus, which
-Salesforce limits to zero calls in Developer Edition and trial orgs. Run
+was limited to zero calls in the Developer Edition and trial orgs I tested. Run
 `sf apex run --file scripts/apex/check-model-access.apex` in your org before
-anything else: if Opus is refused with `limit=0`, Optimizer cannot run there.
+anything else: if Opus is refused with `limit=0`, Optimizer has no model to
+reason with there.
 
 **Requirements:** Salesforce CLI 2.150+, Node 22+, and an org with Agentforce,
 Testing Center, Lightning Knowledge, and Data Cloud. Knowledge answers go
@@ -166,8 +167,21 @@ with its reason in [`overrides.csv`](results/baseline/overrides.csv).
 | Escalation | 4 | 3 | not run |
 | **Total** | **30** | **17** | **not run** |
 
-Five questions flipped between pass and fail across the three runs with no
-change to the agent. Any "after" gain smaller than that is noise.
+![Every question in every baseline run](docs/images/grid.png)
+
+The totals hide two things, and `npm run score` prints both:
+
+- **The randomness lives in tool calls.** Five questions flipped between pass
+  and fail with no change to the agent: OS-01, OS-05, OS-06, RT-02 and RT-03.
+  Every one needed an order lookup, and each flip came down to whether the
+  agent called Get Order Status. Routing mistakes failed in all three runs.
+  Any "after" gain smaller than five is noise.
+- **Answers alone flatter the agent.** Graded only on its answers, after the
+  human review, the agent passes 24 of 30 in each run. Seven questions sounded right but skipped a
+  lookup or went to the wrong subagent. None of the 36 failed runs failed on
+  the answer alone.
+
+![Answers alone versus the full grade](docs/images/answers.png)
 
 **Why the after half did not run.** Agent Optimizer was turned on and its
 Setup was complete, but every question to Ask Optimizer failed. Its own model
@@ -182,13 +196,15 @@ The same limit of zero appears in an Agentforce 360 Platform trial org
 [`check-model-access.apex`](scripts/apex/check-model-access.apex) to see what
 your org reports.
 
+![Why Ask Optimizer fails in free and trial orgs](docs/images/gate.png)
+
 ---
 
 ## What building this taught us
 
 **Agent Optimizer depends on a model your org may not be allowed to call.**
-The Setup switch appears in Developer Edition and trial orgs, but Optimizer
-reasons with Claude Opus, which those orgs can call zero times a minute. The
+The Setup switch appears in a Developer Edition org, but Optimizer reasons
+with Claude Opus, which my Developer Edition and trial orgs could not call. The
 error you see is only "I ran into an error while analyzing your question."
 Check model access first.
 
@@ -223,6 +239,10 @@ not ready." Once I set it back and made every change on the page, it worked.
 the four product questions directly instead of sending them to Product Help.
 The answers sounded right. Read the trace, not just the answer.
 
+**Grade the path, not just the answer.** Graded on answers alone, the day-one
+agent scores 24 of 30. Checking the subagent and the actions too brings it to
+17. A tool that only improves how answers sound can look like progress.
+
 ---
 
 ## Repo layout
@@ -250,6 +270,7 @@ test-set/                          the 30 questions, the spec and the scoring sh
 practice/                          the 60 practice conversations and their transcripts
 results/baseline/                  raw results, scores and reviewed overrides
 docs/agent-setup.md                the day-one agent, word for word
+docs/images/                       the article's figures and screenshots
 ```
 
 ---

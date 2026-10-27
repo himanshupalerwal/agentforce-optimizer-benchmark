@@ -37,3 +37,12 @@ script. Order numbers in the RO-20xx range do not exist on purpose.
    matches a test question. Each transcript is saved under `practice/runs/`.
 3. Point Optimizer at those sessions. Never point it at the test set, and
    never upload `test-set/test-set.csv` anywhere Optimizer can read it.
+
+## A note on setup previews
+
+While checking the setup on October 26, 2026, I ran four previews in the test
+org that used test questions word for word: PQ-02 three times and OS-01 once.
+That breaks the rule in [docs/agent-setup.md](../docs/agent-setup.md) to check
+the setup with questions outside the test set. Session tracing was not on yet,
+so those previews left no record for Optimizer to read. The 60 practice
+conversations ran after tracing was turned on.

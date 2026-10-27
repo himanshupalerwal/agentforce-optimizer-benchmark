@@ -13,6 +13,12 @@ The answer check is AI-judged. Accepted human overrides are applied; proposed on
 | Escalation | 4 | 3 | 3 | 3 | 3 |
 | **Total** | **30** | **19** | **18** | **17** | **17** |
 
+## What the totals hide
+
+- **Flipped with no change to the agent:** 5 (OS-01, OS-05, OS-06, RT-02, RT-03).
+- **Graded on the answer check alone:** 24 of 30 pass in at least two of three runs (runs: 24, 24, 24).
+- **Failed runs:** 36. With a routing failure: 21. With an action failure: 18. Failed on the answer alone: 0.
+
 ## Human overrides of the answer check
 
 8 accepted and applied, 0 proposed and not applied. See overrides.csv.
