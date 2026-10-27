@@ -9,12 +9,8 @@ the model Optimizer needs.**
 
 One ordinary service agent. Thirty locked questions. Three runs before, three runs after.
 
-Companion repo for **"Before You Trust Agent Optimizer: Build This Test, and
-Check the Model Limit First"** by [Himanshu Palerwal](https://linkedin.com/in/himanshupalerwal),
-on Salesforce Trail (article link coming soon).
-
 Agent Optimizer reads an Agentforce agent's conversations, finds what is going
-wrong, and proposes the fix. Demos are built to succeed, so the article tests
+wrong, and proposes the fix. Demos are built to succeed, so this repo tests
 that promise the boring way: score a day-one agent, let Optimizer find and fix
 problems, and score it again. Same questions. Same rules. Only the agent
 changes.
@@ -297,7 +293,7 @@ test-set/                          the 30 questions, the spec and the scoring sh
 practice/                          the 60 practice conversations and their transcripts
 results/baseline/                  raw results, scores and reviewed overrides
 docs/agent-setup.md                the day-one agent, word for word
-docs/images/                       the article's figures and screenshots
+docs/images/                       figures and screenshots
 ```
 
 ---

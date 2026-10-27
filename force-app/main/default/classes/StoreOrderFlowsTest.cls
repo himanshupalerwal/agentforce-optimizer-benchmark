@@ -215,7 +215,7 @@ private class StoreOrderFlowsTest {
     /**
      * RO-1006 is final sale. The flow still opens the case, because deciding
      * whether a return is allowed is the agent's job, not the flow's. This test
-     * pins that split so the article's test measures the agent.
+     * pins that split so the benchmark measures the agent.
      */
     @IsTest
     static void createReturnCaseDoesNotJudgeEligibility() {

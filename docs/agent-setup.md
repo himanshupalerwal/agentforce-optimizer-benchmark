@@ -55,7 +55,7 @@ sf org assign permset --name Store_Orders_Agent --on-behalf-of <agent user's use
 ```
 
 Put that username in the agent file's `default_agent_user`. The one in the
-repo belongs to the org the article's test runs in; yours will differ.
+repo belongs to the org this test ran in; yours will differ.
 
 Without the permission set, Get Order Status finds nothing, and every order
 question fails for a reason that has nothing to do with the agent's

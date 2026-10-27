@@ -1,6 +1,6 @@
 # Contributing
 
-This repo is the companion to an article, so its job is to stay **correct** and
+This repo is a fixed benchmark, so its job is to stay **correct** and
 **reproducible** rather than to grow features. The most valuable contributions
 are corrections: a claim that has gone stale, a platform behaviour that changed,
 a step that no longer works in a fresh org.

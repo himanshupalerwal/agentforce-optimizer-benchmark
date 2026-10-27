@@ -1,10 +1,11 @@
 # Results
 
-This folder holds the raw Testing Center results from the article's test.
-It stays empty until the runs are done. Nothing here is estimated or
-reconstructed.
+This folder holds the raw Testing Center results from the benchmark.
+A phase's folder fills only after its runs are done. Nothing here is
+estimated or reconstructed. The baseline is done; the after phase has not
+run yet.
 
-When the runs are done, it holds:
+When both phases are done, it holds:
 
 ```
 results/
