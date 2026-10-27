@@ -71,6 +71,11 @@ The 30-day return window lands the same way every time.
 
 ## Quick start
 
+**Check the model first.** Agent Optimizer reasons with Claude Opus, which
+Salesforce limits to zero calls in Developer Edition and trial orgs. Run
+`sf apex run --file scripts/apex/check-model-access.apex` in your org before
+anything else: if Opus is refused with `limit=0`, Optimizer cannot run there.
+
 **Requirements:** Salesforce CLI 2.150+, Node 22+, and an org with Agentforce,
 Testing Center, Lightning Knowledge, and Data Cloud. Knowledge answers go
 through an Agentforce Data Library, and a Data Library needs Data Cloud. To
