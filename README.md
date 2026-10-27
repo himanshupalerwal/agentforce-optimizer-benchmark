@@ -98,8 +98,8 @@ The 30-day return window lands the same way every time.
 **Check the model first.** Agent Optimizer reasons with Claude Opus, which
 was limited to zero calls in the Developer Edition and trial orgs I tested. Run
 `npm run check:model -- --target-org <your-org>` before
-anything else: if Opus is refused with `limit=0`, Optimizer has no model to
-reason with there.
+anything else: if Opus is refused with `limit=0`, Optimizer can't reach
+the model it reasons with there.
 
 **Requirements:** Salesforce CLI 2.150+, Node 22+, and an org with Agentforce,
 Testing Center, Lightning Knowledge, and Data Cloud. Knowledge answers go
@@ -194,7 +194,7 @@ The totals hide two things, and `npm run score` prints both:
   and fail with no change to the agent: OS-01, OS-05, OS-06, RT-02 and RT-03.
   Every one needed an order lookup, and each flip came down to whether the
   agent called Get Order Status. Routing mistakes failed in all three runs.
-  Any "after" gain smaller than five is noise.
+  Treat an "after" gain of five or fewer as noise.
 - **Answers alone flatter the agent.** Graded only on its answers, after the
   human review, the agent passes 24 of 30 in each run. Seven questions sounded right but skipped a
   lookup or went to the wrong subagent. None of the 36 failed runs failed on
@@ -207,11 +207,12 @@ Setup was complete, but every question to Ask Optimizer failed.
 
 ![Ask Optimizer failing next to a working Agent Analytics page](docs/images/ask-optimizer-error.png)
 
-Its own model calls go to Claude Opus 4.8, and Salesforce's model gatekeeper
+Its reasoning calls go to Claude Opus 4.8, and Salesforce's model gatekeeper
 refuses them:
 
 ```
-429 LLM_GATEKEEPER  limit=0, remaining=0 ... org_status:Free & model:advanced-models
+429 LLM_GATEKEEPER: You have exceeded your rate limit. Please try again later.
+{limit=0, remaining=0, ... org_status:Free&model:advanced-models}
 ```
 
 The same limit of zero appears in an Agentforce 360 Platform trial org
@@ -258,9 +259,9 @@ exactly that.
 of its settings through the Metadata API, the page kept reporting "Data space
 not ready." Once I set it back and made every change on the page, it worked.
 
-**The router can answer by itself.** In every baseline run, the router answered
-the four product questions directly instead of sending them to Product Help.
-The answers sounded right. Read the trace, not just the answer.
+**Questions can stay with the router.** In every baseline run, Testing Center
+showed four of the six product questions handled by the router instead of
+Product Help. The answers sounded right. Read the trace, not just the answer.
 
 **Grade the path, not just the answer.** Graded on answers alone, the day-one
 agent scores 24 of 30. Checking the subagent and the actions too brings it to

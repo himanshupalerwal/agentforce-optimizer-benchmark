@@ -192,6 +192,6 @@ the order flow, ask about a practice order, such as RO-1011 with
 avery@example.com: Get Order Status should return `verified` true.
 
 Read the trace with `sf agent trace list` and `sf agent trace read`. A correct
-answer is not enough. The router can answer a question itself, without the
-knowledge action, and still sound right. If either check fails, fix the setup
+answer is not enough. A question can stay with the router instead of reaching
+its subagent, and the answer can still sound right. If either check fails, fix the setup
 before Run 1. A setup failure is not a result.
