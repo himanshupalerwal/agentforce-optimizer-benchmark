@@ -3,14 +3,20 @@
 **One ordinary service agent. Thirty locked questions. Three runs before, three runs after.**
 
 Companion repo for **"Does Agent Optimizer Actually Make Your Agent Better? A
-Before-and-After Test"** by Himanshu Palerwal, on Salesforce Trail
-(article link coming soon).
+Before-and-After Test"** by [Himanshu Palerwal](https://linkedin.com/in/himanshupalerwal),
+on Salesforce Trail (article link coming soon).
 
 Agent Optimizer reads an Agentforce agent's conversations, finds what is going
 wrong, and proposes the fix. Demos are built to succeed, so the article tests
-that promise the boring way: score a day-one agent, apply Optimizer's
-recommendations, and score it again. Same questions. Same rules. Only the agent
-changes. This repo holds everything you need to rerun that test in your own org.
+that promise the boring way: score a day-one agent, let Optimizer find and fix
+problems, and score it again. Same questions. Same rules. Only the agent
+changes.
+
+The "before" is done: the day-one agent passes **17 of 30** questions. The
+"after" is blocked in free and trial orgs, and this repo shows why: Agent
+Optimizer reasons with Claude Opus, and Salesforce limits Opus to **zero calls**
+in orgs it marks Free or Trial. Everything here is ready to run the after half
+in an org that can call Opus.
 
 > An agent change is only an improvement if the same test says so, before and after.
 
@@ -78,9 +84,10 @@ anything else: if Opus is refused with `limit=0`, Optimizer cannot run there.
 
 **Requirements:** Salesforce CLI 2.150+, Node 22+, and an org with Agentforce,
 Testing Center, Lightning Knowledge, and Data Cloud. Knowledge answers go
-through an Agentforce Data Library, and a Data Library needs Data Cloud. To
-run the "after" half you also need Agent Optimizer, which Salesforce offers in
-beta through your account executive.
+through an Agentforce Data Library, and a Data Library needs Data Cloud. The
+baseline runs in a Developer Edition org. The "after" half also needs Agent
+Optimizer (Beta), turned on in Setup, in an org where the check above shows
+Opus answering: a sandbox of a paid Agentforce org is the likely fit.
 
 > **Never use a production org.** Testing Center runs your actions for real, so
 > Create Return Case opens real Cases, and test runs use credits. Use a sandbox,
@@ -127,8 +134,9 @@ and no Agent Optimizer. Run the real test in an org that has both.
    [test-set/README.md](test-set/README.md).
 4. **Run it three times.** Copy each run's Pass or Fail into a copy of the
    scoring sheet. Save each raw export in `results/baseline/`.
-5. **Run the 60 practice conversations** against the agent, and point Optimizer
-   at those sessions. Never at the test set.
+5. **Turn on session tracing, then run the 60 practice conversations** against
+   the agent with `npm run practice -- <org>`, and point Optimizer at those
+   sessions. Never at the test set. See [practice/README.md](practice/README.md).
 6. **Review each recommendation against its evidence.** Apply only what points
    to real failed conversations, changes only the agent, and stays inside what
    the agent was built to do. Log each decision in `results/recommendations.md`.
@@ -139,22 +147,81 @@ and no Agent Optimizer. Run the real test in an org that has both.
 
 ## Results
 
-**Baseline: run. After: not run yet.** The three baseline runs of version 1
-are in [`results/baseline/`](results/baseline): the raw Testing Center files,
-unedited, and the automated scores in
-[`scores.md`](results/baseline/scores.md). Those scores come before the human
-review of the AI-judged answers, so the table below stays empty until that
-review is done. Nothing in this repo is estimated.
+**Before: done. After: blocked in free and trial orgs.**
 
-| Category | Questions | Before (passed, 2 of 3 runs) | After (passed, 2 of 3 runs) |
+The day-one agent, version 1, passed **17 of 30** questions on the
+two-of-three rule. Single runs scored 19, 18 and 17. The raw Testing Center
+files are in [`results/baseline/`](results/baseline), unedited, with the scored
+sheet and every failed check in [`scores.md`](results/baseline/scores.md). The
+AI judge's answer verdicts were reviewed by hand: 8 of 90 were overruled, each
+with its reason in [`overrides.csv`](results/baseline/overrides.csv).
+
+| Category | Questions | Before (passed, 2 of 3 runs) | After |
 | --- | --- | --- | --- |
-| Order status | 6 | | |
-| Returns | 6 | | |
-| Product questions | 6 | | |
-| Vague or multi-part | 4 | | |
-| Off-topic | 4 | | |
-| Escalation | 4 | | |
-| **Total** | **30** | | |
+| Order status | 6 | 3 | not run |
+| Returns | 6 | 3 | not run |
+| Product questions | 6 | 2 | not run |
+| Vague or multi-part | 4 | 2 | not run |
+| Off-topic | 4 | 4 | not run |
+| Escalation | 4 | 3 | not run |
+| **Total** | **30** | **17** | **not run** |
+
+Five questions flipped between pass and fail across the three runs with no
+change to the agent. Any "after" gain smaller than that is noise.
+
+**Why the after half did not run.** Agent Optimizer was turned on and its
+Setup was complete, but every question to Ask Optimizer failed. Its own model
+calls go to Claude Opus 4.8, and Salesforce's model gatekeeper refuses them:
+
+```
+429 LLM_GATEKEEPER  limit=0, remaining=0 ... org_status:Free & model:advanced-models
+```
+
+The same limit of zero appears in an Agentforce 360 Platform trial org
+(`org_status:Trial`). Claude Sonnet answers in both. Run
+[`check-model-access.apex`](scripts/apex/check-model-access.apex) to see what
+your org reports.
+
+---
+
+## What building this taught us
+
+**Agent Optimizer depends on a model your org may not be allowed to call.**
+The Setup switch appears in Developer Edition and trial orgs, but Optimizer
+reasons with Claude Opus, which those orgs can call zero times a minute. The
+error you see is only "I ran into an error while analyzing your question."
+Check model access first.
+
+**Testing Center does not record every action.** The knowledge lookup and the
+template's escalation step never appear in a run's invoked actions, even when
+the answer clearly comes from them. Expect them, and those questions fail every
+run whatever the agent does.
+
+**Testing Center's action check cannot catch an extra action.** It confirms the
+expected actions ran; it does not fail a run that also opened a case it should
+not have. `npm run score` checks the exact set from the raw results instead.
+
+**The AI judge needs a human.** It scored word-for-word identical answers
+differently in different runs. Without review, the baseline reads 16 instead
+of 17, and the noise looks like 8 flips instead of 5.
+
+**Create the Data Library after Data Cloud has settled.** A library created
+minutes after Data Cloud was turned on failed its first stage
+(`ADL_DC_ASSET_FAILED`). Deleting it and creating it again ten minutes later
+worked.
+
+**The agent's user needs Data Cloud access to answer from knowledge.** Without
+the default data space and read access to the Knowledge Summary field, every
+knowledge answer fails with an access error. `Store_Knowledge_Agent` grants
+exactly that.
+
+**Make Einstein Audit changes on the Setup page itself.** After I changed one
+of its settings through the Metadata API, the page kept reporting "Data space
+not ready." Once I set it back and made every change on the page, it worked.
+
+**The router can answer by itself.** In every baseline run, the router answered
+the four product questions directly instead of sending them to Product Help.
+The answers sounded right. Read the trace, not just the answer.
 
 ---
 
@@ -168,15 +235,20 @@ force-app/main/default/
   classes/StoreOrderFlowsTest      Apex tests for both flows
   permissionsets/                  Store_Orders_Admin · Store_Orders_Agent
   aiAuthoringBundles/              the day-one agent, as Agent Script
+  aiEvaluationDefinitions/         the 30-question Testing Center test
 data-cloud/                        Store_Knowledge_Agent permission set (Data Cloud orgs only)
 knowledge/                         the 8 articles, as Markdown (source of truth)
 scripts/
+  apex/check-model-access.apex     can this org call the model Optimizer needs?
   apex/load-sample-orders.apex     12 orders, dates relative to today
   apex/load-knowledge-articles.apex  generated from knowledge/ by build-knowledge-apex.mjs
+  build-test-spec.mjs              the test set as a Testing Center spec
+  score-results.mjs                scores the raw Testing Center results
+  run-practice.mjs                 sends the 60 practice conversations
   check-consistency.mjs            the offline check run by CI
-test-set/                          the 30 questions and the scoring sheet
-practice/                          the 60 practice conversations
-results/                           raw results, empty until the runs are done
+test-set/                          the 30 questions, the spec and the scoring sheet
+practice/                          the 60 practice conversations and their transcripts
+results/baseline/                  raw results, scores and reviewed overrides
 docs/agent-setup.md                the day-one agent, word for word
 ```
 
@@ -185,9 +257,12 @@ docs/agent-setup.md                the day-one agent, word for word
 ## Verify everything
 
 ```bash
-npm run check            # offline consistency check, also run by GitHub Actions
-npm run build:knowledge  # regenerate the knowledge loader after editing knowledge/
-npm run test:apex        # the flow tests, in your org
+npm run check                 # offline consistency check, also run by GitHub Actions
+npm run build:knowledge       # regenerate the knowledge loader after editing knowledge/
+npm run build:test-spec       # regenerate the Testing Center spec after editing the test set
+npm run test:apex             # the flow tests, in your org
+npm run score -- baseline     # score the raw baseline results, with reviewed overrides
+sf apex run --file scripts/apex/check-model-access.apex   # can this org run Optimizer?
 ```
 
 `npm run check` recomputes every expected lookup and return decision in the
@@ -215,8 +290,11 @@ deploy, all Apex tests, and both loaders run twice to prove they are safe to
 re-run. The same setup was then repeated in a Developer Edition org with Data
 Cloud on 25 October 2026. There the agent was published and activated, its
 order action ran as the agent's user, and its knowledge action answered from
-the store's articles through the Data Library. Agentforce moves quickly; if something here has drifted, trust the org
-over this README.
+the store's articles through the Data Library. The baseline ran there on 26
+October 2026. The model gate was measured
+on 26 and 27 October 2026 in that Developer Edition org and in an Agentforce
+360 Platform trial. Agentforce moves quickly; if something here has drifted,
+trust the org over this README.
 
 ## License
 
