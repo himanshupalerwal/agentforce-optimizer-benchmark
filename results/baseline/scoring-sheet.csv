@@ -18,7 +18,7 @@ PQ-04,Product questions,Fail,Fail,Fail,"=IF(COUNTIF(C17:E17,""Pass"")>=2,""Pass"
 PQ-05,Product questions,Pass,Pass,Pass,"=IF(COUNTIF(C18:E18,""Pass"")>=2,""Pass"",""Fail"")",
 PQ-06,Product questions,Pass,Pass,Pass,"=IF(COUNTIF(C19:E19,""Pass"")>=2,""Pass"",""Fail"")",
 VM-01,Vague or multi-part,Pass,Pass,Pass,"=IF(COUNTIF(C20:E20,""Pass"")>=2,""Pass"",""Fail"")",
-VM-02,Vague or multi-part,Fail,Fail,Fail,"=IF(COUNTIF(C21:E21,""Pass"")>=2,""Pass"",""Fail"")",R1: subagent (product_help) | R2: subagent (product_help); answer | R3: subagent (returns)
+VM-02,Vague or multi-part,Fail,Fail,Fail,"=IF(COUNTIF(C21:E21,""Pass"")>=2,""Pass"",""Fail"")",R1: subagent (product_help) | R2: subagent (product_help); answer | R3: subagent (returns); answer
 VM-03,Vague or multi-part,Fail,Fail,Fail,"=IF(COUNTIF(C22:E22,""Pass"")>=2,""Pass"",""Fail"")","R1: subagent (product_help); action (got none, want get_order_status); answer | R2: subagent (product_help); action (got none, want get_order_status); answer | R3: subagent (product_help); action (got none, want get_order_status); answer"
 VM-04,Vague or multi-part,Pass,Pass,Pass,"=IF(COUNTIF(C23:E23,""Pass"")>=2,""Pass"",""Fail"")",
 OT-01,Off-topic,Pass,Pass,Pass,"=IF(COUNTIF(C24:E24,""Pass"")>=2,""Pass"",""Fail"")",

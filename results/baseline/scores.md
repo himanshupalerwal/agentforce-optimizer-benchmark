@@ -16,12 +16,12 @@ The answer check is AI-judged. Accepted human overrides are applied; proposed on
 ## What the totals hide
 
 - **Flipped with no change to the agent:** 5 (OS-01, OS-05, OS-06, RT-02, RT-03).
-- **Graded on the answer check alone:** 24 of 30 pass in at least two of three runs (runs: 24, 24, 24).
+- **Graded on the answer check alone:** 23 of 30 pass in at least two of three runs (runs: 24, 24, 23).
 - **Failed runs:** 36. With a routing failure: 21. With an action failure: 18. Failed on the answer alone: 0.
 
 ## Human overrides of the answer check
 
-8 accepted and applied, 0 proposed and not applied. See overrides.csv.
+9 accepted and applied, 0 proposed and not applied. See overrides.csv.
 
 | ID | Run | Judge | Override | Status |
 | --- | --- | --- | --- | --- |
@@ -33,6 +33,7 @@ The answer check is AI-judged. Accepted human overrides are applied; proposed on
 | RT-05 | 2 | Pass | Fail | accepted |
 | VM-03 | 2 | Pass | Fail | accepted |
 | VM-02 | 2 | Pass | Fail | accepted |
+| VM-02 | 3 | Pass | Fail | accepted |
 
 ## Every failed check
 
@@ -67,7 +68,7 @@ The answer check is AI-judged. Accepted human overrides are applied; proposed on
 | PQ-04 | 3 | subagent (topic_selector) |
 | VM-02 | 1 | subagent (product_help) |
 | VM-02 | 2 | subagent (product_help); answer |
-| VM-02 | 3 | subagent (returns) |
+| VM-02 | 3 | subagent (returns); answer |
 | VM-03 | 1 | subagent (product_help); action (got none, want get_order_status); answer |
 | VM-03 | 2 | subagent (product_help); action (got none, want get_order_status); answer |
 | VM-03 | 3 | subagent (product_help); action (got none, want get_order_status); answer |

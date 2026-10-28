@@ -6,7 +6,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 export const ROOT = fileURLToPath(new URL('..', import.meta.url));
 
 /** True when the module at `url` is the script node was started with. */
-export const isMain = url => url === pathToFileURL(process.argv[1]).href;
+export const isMain = url => Boolean(process.argv[1]) && url === pathToFileURL(process.argv[1]).href;
 
 /** Salesforce Knowledge__kav.Summary is a 1,000-character field. */
 export const SUMMARY_LIMIT = 1000;

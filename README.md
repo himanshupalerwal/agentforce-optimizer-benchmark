@@ -30,7 +30,7 @@ Everything here is ready to run the after half in an org that can call Opus.
 | Measure | Result |
 | --- | --- |
 | Day-one agent, graded on route, actions and answer | **17 of 30** |
-| Same runs, graded on the answer alone | **24 of 30** |
+| Same runs, graded on the answer alone | **23 of 30** |
 | Questions that flipped with no change to the agent | **5**, all order lookups |
 | Claude Opus calls allowed in the free and trial orgs tested | **0** (`limit=0`) |
 
@@ -234,7 +234,7 @@ The day-one agent, version 1, passed **17 of 30** questions on the
 two-of-three rule. Single runs scored 19, 18 and 17. The raw Testing Center
 files are in [`results/baseline/`](results/baseline), unedited, with the scored
 sheet and every failed check in [`scores.md`](results/baseline/scores.md). The
-AI judge's answer verdicts were reviewed by hand: 8 of 90 were overruled, each
+AI judge's answer verdicts were reviewed by hand: 9 of 90 were overruled, each
 with its reason in [`overrides.csv`](results/baseline/overrides.csv).
 
 | Category | Questions | Before (passed, 2 of 3 runs) | After |
@@ -262,8 +262,8 @@ The totals hide two things, and `npm run score` prints both:
   that passed every baseline run and fails two of three after runs is a
   regression. Three runs are the minimum; five catch more of the noise.
 - **Answers alone flatter the agent.** Graded only on its answers, after the
-  human review, the agent passes 24 of 30 in each run. Seven questions sounded right but skipped a
-  lookup or went to the wrong subagent. None of the 36 failed runs failed on
+  human review, the agent passes 23 of 30 (24, 24 and 23 in single runs). Six
+  questions sounded right but skipped a lookup or stayed with the router. None of the 36 failed runs failed on
   the answer alone.
 
 ![Answers alone versus the full grade](docs/images/answers.png)
@@ -341,7 +341,7 @@ showed four of the six product questions handled by the router instead of
 Product Help. The answers sounded right. Read the trace, not just the answer.
 
 **Grade the path, not just the answer.** Graded on answers alone, the day-one
-agent scores 24 of 30. Checking the subagent and the actions too brings it to
+agent scores 23 of 30. Checking the subagent and the actions too brings it to
 17. A tool that only improves how answers sound can look like progress.
 
 ---
