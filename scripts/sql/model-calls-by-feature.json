@@ -1,0 +1,3 @@
+{
+  "sql": "SELECT r.feature__c, r.model__c, COUNT(*) AS calls, MIN(r.timestamp__c) AS first_call, MAX(r.timestamp__c) AS last_call, SUM(r.totalTokens__c) AS total_tokens FROM GenAIGatewayRequest__dlm r GROUP BY r.feature__c, r.model__c ORDER BY r.feature__c, r.model__c"
+}

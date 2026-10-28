@@ -1,8 +1,12 @@
 // Shared helpers for the offline scripts. Node built-ins only, no dependencies.
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
-export const ROOT = new URL('..', import.meta.url).pathname;
+export const ROOT = fileURLToPath(new URL('..', import.meta.url));
+
+/** True when the module at `url` is the script node was started with. */
+export const isMain = url => url === pathToFileURL(process.argv[1]).href;
 
 /** Salesforce Knowledge__kav.Summary is a 1,000-character field. */
 export const SUMMARY_LIMIT = 1000;

@@ -8,7 +8,7 @@
 // between the baseline and the after runs.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { ROOT, parseCsv } from './lib.mjs';
+import { ROOT, isMain, parseCsv } from './lib.mjs';
 
 export const SUBAGENT_API_NAMES = {
   'Order Status': 'order_status',
@@ -55,7 +55,7 @@ export function buildSpec(version = 'v1') {
   return lines.join('\n') + '\n';
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (isMain(import.meta.url)) {
   writeFileSync(OUTPUT, buildSpec(process.argv[2] ?? 'v1'));
   console.log(`Wrote ${OUTPUT.replace(ROOT, '')}`);
 }

@@ -1,0 +1,113 @@
+{
+  "query": "scripts/sql/model-calls-by-feature.json",
+  "org": "the Developer Edition org the baseline ran in",
+  "queried": "2026-10-28 UTC",
+  "data": [
+    [
+      "AI Platform Models Apex",
+      "anthropic.claude-sonnet-4-5-20250929-v1:0",
+      33,
+      "2026-10-26T22:30:25.079+00:00",
+      "2026-10-27T22:07:02.776+00:00",
+      594
+    ],
+    [
+      "Agent Force Optimization Agent",
+      "anthropic.claude-opus-4-8",
+      120,
+      "2026-10-26T20:20:23.113+00:00",
+      "2026-10-26T22:25:54.215+00:00",
+      0
+    ],
+    [
+      "Agent Force Optimization Agent",
+      "gpt-5-2025-08-07",
+      12,
+      "2026-10-26T20:20:25.428+00:00",
+      "2026-10-26T22:25:43.86+00:00",
+      2064
+    ],
+    [
+      "Agentforce Conversation Explorer",
+      "gpt-4o-2024-11-20",
+      93,
+      "2026-10-26T22:58:21.479+00:00",
+      "2026-10-27T01:30:41.143+00:00",
+      75253
+    ],
+    [
+      "Agentforce Conversation Explorer",
+      "gpt-4o-mini-2024-07-18",
+      7,
+      "2026-10-27T01:30:17.397+00:00",
+      "2026-10-27T01:30:41.609+00:00",
+      3249
+    ],
+    [
+      "AgentforceConversationExplorer",
+      "sfdc_ai__DefaultGPT4Omni",
+      61,
+      "2026-10-26T22:29:04.103+00:00",
+      "2026-10-27T13:39:00.8+00:00",
+      76431
+    ],
+    [
+      "agentforce-standard-evals",
+      "anthropic.claude-sonnet-4-5-20250929-v1:0",
+      120,
+      "2026-10-26T20:18:35.51+00:00",
+      "2026-10-26T20:31:10.459+00:00",
+      237238
+    ],
+    [
+      "agentforce-standard-evals",
+      "gpt-4.1-2025-04-14",
+      61,
+      "2026-10-26T23:23:31.656+00:00",
+      "2026-10-27T14:13:59.377+00:00",
+      109030
+    ],
+    [
+      "plannerservice",
+      "EinsteinHyperClassifier",
+      12,
+      "2026-10-26T20:20:21.391+00:00",
+      "2026-10-26T22:25:40.999+00:00",
+      5321
+    ]
+  ],
+  "metadata": [
+    {
+      "name": "feature__c",
+      "nullable": true,
+      "type": "Varchar"
+    },
+    {
+      "name": "model__c",
+      "nullable": true,
+      "type": "Varchar"
+    },
+    {
+      "name": "calls",
+      "nullable": false,
+      "type": "BigInt"
+    },
+    {
+      "name": "first_call",
+      "nullable": true,
+      "type": "TimestampTZ"
+    },
+    {
+      "name": "last_call",
+      "nullable": true,
+      "type": "TimestampTZ"
+    },
+    {
+      "name": "total_tokens",
+      "nullable": true,
+      "precision": 38,
+      "scale": 18,
+      "type": "Numeric"
+    }
+  ]
+}

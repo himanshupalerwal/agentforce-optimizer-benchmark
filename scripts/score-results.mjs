@@ -12,7 +12,7 @@
 // human review of the AI-judged answers (see test-set/README.md).
 import { readFileSync, readdirSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { ROOT, parseCsv } from './lib.mjs';
+import { ROOT, isMain, parseCsv } from './lib.mjs';
 import { SUBAGENT_API_NAMES, ACTION_API_NAMES, expectedActions } from './build-test-spec.mjs';
 
 // Testing Center does not list these among a run's invoked actions: the
@@ -61,6 +61,8 @@ export function score(phase) {
   const { rows } = parseCsv(readFileSync(join(ROOT, 'test-set/test-set.csv'), 'utf8'));
   const overrides = loadOverrides(phase);
   const runs = [1, 2, 3].map(n => loadRun(phase, n));
+  const missing = runs.flatMap((run, k) => (run ? [] : [`run-${k + 1}`]));
+  if (missing.length) throw new Error(`results/${phase}/ is missing ${missing.join(', ')}. Score a phase after all three runs.`);
   const results = rows.map((row, i) => {
     const perRun = runs.map(run => {
       if (!run) return null;
@@ -143,7 +145,7 @@ function write(phase, { runs, results, overrides }) {
   writeFileSync(join(dir, 'scores.md'), md.join('\n'));
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (isMain(import.meta.url)) {
   const phase = process.argv[2];
   if (!['baseline', 'after'].includes(phase)) {
     console.error('usage: node scripts/score-results.mjs baseline|after');

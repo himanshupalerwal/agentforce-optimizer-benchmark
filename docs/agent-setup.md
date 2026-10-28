@@ -8,7 +8,11 @@ the test measures.
 The whole agent is in one Agent Script file:
 [`Gear_Store_Service_Agent.agent`](../force-app/main/default/aiAuthoringBundles/Gear_Store_Service_Agent/Gear_Store_Service_Agent.agent).
 You can publish that file, or build the same agent by hand in Agentforce
-Builder. Both routes give the same agent.
+Builder. Both routes give the same agent. The file doesn't pin a model, so
+the agent runs on your org's default model, and your baseline may differ from
+mine. That is why you run your own.
+
+![The test agent: three custom subagents do the work, and three standard ones catch the rest](images/agent.png)
 
 Build it after `npm run deploy`, `npm run load:orders` and
 `npm run load:knowledge` (see the [README](../README.md#quick-start)).
@@ -145,6 +149,8 @@ flow), and Answer Questions with Knowledge.
 **Actions:** Answer Questions with Knowledge.
 
 ## 5. Action inputs and outputs
+
+![Both action flows check the email before they return or change anything](images/flows.png)
 
 | Flow | Inputs | Outputs |
 | --- | --- | --- |

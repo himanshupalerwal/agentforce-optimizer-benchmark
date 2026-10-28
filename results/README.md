@@ -22,15 +22,26 @@ results/
     scores.md
     overrides.csv
   recommendations.md             each Optimizer recommendation, applied or not, and why
+  model-check/                   npm run check:model output, Developer Edition and trial
+  gateway/                       npm run logs:models output: model calls by feature
 ```
 
-Run a phase with the Salesforce CLI, three times:
+`model-check/` and `gateway/` hold the evidence for why the after phase has
+not run: in both orgs, Claude Sonnet answered and Claude Opus was refused
+with `limit=0`, and in the Developer Edition org, Agent Optimizer sent 120
+calls to Opus and got 0 tokens back.
+
+Run a phase with the Salesforce CLI, three times, after `npm run deploy:test`:
 
 ```bash
 sf agent test run --api-name Store_Agent_30_Questions --wait 90 \
   --result-format json --output-dir results/baseline/run-1
 npm run score -- baseline
 ```
+
+For the after phase, set `subjectVersion` to `v2` in the test definition,
+run `npm run deploy:test` again, and write to `results/after/run-1` to
+`run-3`. `npm run score` refuses a phase until all three runs are there.
 
 Rules for this folder:
 

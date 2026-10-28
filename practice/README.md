@@ -35,8 +35,10 @@ script. Order numbers in the RO-20xx range do not exist on purpose.
 
    The script runs `npm run check` first and refuses to send a line that
    matches a test question. Each transcript is saved under `practice/runs/`.
-3. Point Optimizer at those sessions. Never point it at the test set, and
-   never upload `test-set/test-set.csv` anywhere Optimizer can read it.
+   The agent's actions run for real, so return requests open real Cases.
+3. Ask Optimizer about those sessions, and name a timeframe that holds them
+   and no test run. Never upload `test-set/test-set.csv` anywhere Optimizer
+   can read it.
 
 ## A note on setup previews
 
@@ -46,3 +48,8 @@ That breaks the rule in [docs/agent-setup.md](../docs/agent-setup.md) to check
 the setup with questions outside the test set. Session tracing was not on yet,
 so those previews left no record for Optimizer to read. The 60 practice
 conversations ran after tracing was turned on.
+
+`runs/2026-10-26/PR-01.before-tracing.json` is a first try of PR-01, sent
+about five minutes after tracing was switched on. It never appeared among the
+recorded sessions. PR-01 was sent again with the full run (`PR-01.json`), and all 60 were
+confirmed recorded. Give tracing a few minutes before you start.

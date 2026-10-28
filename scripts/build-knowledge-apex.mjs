@@ -3,7 +3,7 @@
 // `npm run check` fails if the generated file is out of date.
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { ROOT, readArticles } from './lib.mjs';
+import { ROOT, isMain, readArticles } from './lib.mjs';
 
 export const OUTPUT = join(ROOT, 'scripts/apex/load-knowledge-articles.apex');
 
@@ -98,7 +98,7 @@ System.debug('Knowledge articles: ' + created + ' created, ' + updated + ' updat
 `;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (isMain(import.meta.url)) {
   writeFileSync(OUTPUT, buildKnowledgeApex());
   console.log(`Wrote ${OUTPUT.replace(ROOT, '')}`);
 }
